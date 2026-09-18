@@ -93,93 +93,83 @@ export default function HomePage() {
 
   return (
     <div className="space-y-32 pb-28 overflow-hidden">
-      {/* 1. HIGH-VOLTAGE NEON HERO SECTION */}
-      <section className="relative min-h-[90vh] flex items-center justify-center pt-16 pb-24 overflow-hidden">
-        {/* Background glow pools */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-cyan/15 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon-pink/15 rounded-full blur-[120px] pointer-events-none" />
-
+      {/* 1. BALANCED SLEEK HERO SECTION */}
+      <section className="relative min-h-[85vh] flex items-center justify-center pt-12 pb-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-8">
-          {/* Pulsing neon badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-neon-cyan/50 bg-[#0a0f1d] text-neon-cyan text-xs font-mono tracking-widest uppercase shadow-[0_0_15px_rgba(0,240,255,0.25)]">
-            <Radio className="w-3.5 h-3.5 text-neon-pink animate-pulse" />
+          {/* Subtle badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-zinc-800 bg-[#07090e] text-zinc-300 text-xs font-mono tracking-wider uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-neon-cyan shadow-[0_0_6px_#00f0ff]" />
             <span>EST. 1994 • CAPE TOWN&apos;S COIN-OP & AMUSEMENTS ATELIER</span>
           </div>
 
-          {/* Giant Neon Display Headline */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white max-w-5xl mx-auto leading-[1.06] uppercase font-mono">
-            COIN-OP SLATE.{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-neon-pink to-neon-purple neon-glow-cyan">
-              RETRO ARCADES.
-            </span>{' '}
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink via-neon-amber to-neon-lime">
-              NEON JUKEBOXES.
-            </span>
+          {/* Crisp Display Headline */}
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white max-w-5xl mx-auto leading-[1.08] uppercase font-mono">
+            COIN-OP SLATE. <span className="text-zinc-400">RETRO ARCADES.</span><br />
+            <span className="text-white">NEON JUKEBOXES.</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="mt-4 text-base sm:text-xl text-zinc-300 max-w-3xl mx-auto leading-relaxed font-normal">
-            We manufacture, sell, and lease tournament pool tables, 3,000-game retro arcade cabinets, glowing bubble jukeboxes, and overhead neon lighting. Zero-capital commercial venue leasing or custom private commissions.
+          <p className="mt-4 text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed font-normal">
+            Manufacturing, retail, and commercial leasing of slate pool tables, 3,000-game multicades, illuminated bubble jukeboxes, and tournament lighting.
           </p>
 
-          {/* Category Quick Jump Badges */}
+          {/* Category Quick Jump Badges (Subtle outline, responsive hover glow) */}
           <div className="flex flex-wrap items-center justify-center gap-2.5 pt-2">
             <a
               href="#pool"
-              className="px-3.5 py-1.5 rounded-xl bg-arcade-card border border-neon-cyan/40 hover:border-neon-cyan text-neon-cyan text-xs font-mono font-bold flex items-center gap-1.5 transition-all shadow-[0_0_10px_rgba(0,240,255,0.15)]"
+              className="px-3.5 py-1.5 rounded-xl bg-[#080a0f] border border-neon-cyan/25 text-zinc-300 hover:text-white hover:border-neon-cyan/80 btn-hover-glow-cyan text-xs font-mono font-medium flex items-center gap-1.5 transition-all"
             >
-              <Trophy className="w-3.5 h-3.5" /> Pool Tables
+              <Trophy className="w-3.5 h-3.5 text-neon-cyan" /> Pool Tables
             </a>
             <a
               href="#arcades"
-              className="px-3.5 py-1.5 rounded-xl bg-arcade-card border border-neon-pink/40 hover:border-neon-pink text-neon-pink text-xs font-mono font-bold flex items-center gap-1.5 transition-all shadow-[0_0_10px_rgba(255,0,127,0.15)]"
+              className="px-3.5 py-1.5 rounded-xl bg-[#080a0f] border border-neon-pink/25 text-zinc-300 hover:text-white hover:border-neon-pink/80 btn-hover-glow-pink text-xs font-mono font-medium flex items-center gap-1.5 transition-all"
             >
-              <Gamepad2 className="w-3.5 h-3.5" /> Retro Arcades
+              <Gamepad2 className="w-3.5 h-3.5 text-neon-pink" /> Retro Arcades
             </a>
             <a
               href="#jukeboxes"
-              className="px-3.5 py-1.5 rounded-xl bg-arcade-card border border-neon-amber/40 hover:border-neon-amber text-neon-amber text-xs font-mono font-bold flex items-center gap-1.5 transition-all shadow-[0_0_10px_rgba(255,183,0,0.15)]"
+              className="px-3.5 py-1.5 rounded-xl bg-[#080a0f] border border-neon-amber/25 text-zinc-300 hover:text-white hover:border-neon-amber/80 transition-all hover:shadow-[0_0_15px_rgba(255,183,0,0.3)] text-xs font-mono font-medium flex items-center gap-1.5"
             >
-              <Disc3 className="w-3.5 h-3.5" /> Jukeboxes
+              <Disc3 className="w-3.5 h-3.5 text-neon-amber" /> Jukeboxes
             </a>
             <a
               href="#accessories"
-              className="px-3.5 py-1.5 rounded-xl bg-arcade-card border border-neon-purple/40 hover:border-neon-purple text-neon-purple text-xs font-mono font-bold flex items-center gap-1.5 transition-all shadow-[0_0_10px_rgba(176,38,255,0.15)]"
+              className="px-3.5 py-1.5 rounded-xl bg-[#080a0f] border border-neon-purple/25 text-zinc-300 hover:text-white hover:border-neon-purple/80 transition-all hover:shadow-[0_0_15px_rgba(176,38,255,0.3)] text-xs font-mono font-medium flex items-center gap-1.5"
             >
-              <Lightbulb className="w-3.5 h-3.5" /> Neon Lighting
+              <Lightbulb className="w-3.5 h-3.5 text-neon-purple" /> Neon Lighting
             </a>
             <a
               href="#projects"
-              className="px-3.5 py-1.5 rounded-xl bg-arcade-card border border-neon-lime/40 hover:border-neon-lime text-neon-lime text-xs font-mono font-bold flex items-center gap-1.5 transition-all shadow-[0_0_10px_rgba(57,255,20,0.15)]"
+              className="px-3.5 py-1.5 rounded-xl bg-[#080a0f] border border-neon-lime/25 text-zinc-300 hover:text-white hover:border-neon-lime/80 transition-all hover:shadow-[0_0_15px_rgba(57,255,20,0.3)] text-xs font-mono font-medium flex items-center gap-1.5"
             >
-              <Camera className="w-3.5 h-3.5" /> Past Projects
+              <Camera className="w-3.5 h-3.5 text-neon-lime" /> Past Projects
             </a>
           </div>
 
-          {/* Primary Action Buttons */}
+          {/* Primary Action Buttons (Sleek, luminous hover glow) */}
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/configurator"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-neon-cyan via-neon-blue to-neon-purple hover:from-neon-cyan hover:to-neon-pink text-black font-black text-sm shadow-neon-cyan transition-all font-mono tracking-wider active:scale-95"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-white text-black hover:bg-zinc-100 font-bold text-xs tracking-wider font-mono btn-hover-glow-white active:scale-95 transition-all shadow-sm"
             >
               LAUNCH 3D ATELIER
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/commercial/planner"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl border border-neon-pink/60 bg-neon-pink/10 hover:bg-neon-pink/20 text-neon-pink font-bold text-sm shadow-neon-pink transition-all font-mono tracking-wider active:scale-95"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl border border-zinc-800 bg-[#080a0f] text-zinc-300 hover:text-white hover:border-neon-cyan/70 font-semibold text-xs tracking-wider font-mono btn-hover-glow-cyan active:scale-95 transition-all"
             >
-              <Compass className="w-4 h-4" />
+              <Compass className="w-4 h-4 text-neon-cyan" />
               VENUE CAD CLEARANCE PLANNER
             </Link>
           </div>
         </div>
       </section>
 
-      {/* NEON TUBE DIVIDER */}
+      {/* Subtle Hairline Divider */}
       <div className="max-w-6xl mx-auto px-4">
-        <div className="neon-tube-cyan" />
+        <div className="borderline-divider-cyan" />
       </div>
 
       {/* 2. 🎱 COMMERCIAL & CUSTOM POOL TABLES */}
@@ -207,13 +197,13 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Card 1 */}
-          <div className="rounded-3xl border border-arcade-border bg-arcade-card p-6 space-y-6 flex flex-col justify-between hover:border-neon-cyan/60 transition-all group">
+          <div className="rounded-3xl border border-zinc-800/90 bg-[#080a0f] p-6 space-y-6 flex flex-col justify-between hover:border-neon-cyan/50 hover:shadow-subtle-cyan transition-all group">
             <div className="space-y-4">
               <div className="flex justify-between items-start">
-                <span className="px-2.5 py-1 rounded-md bg-neon-cyan/10 border border-neon-cyan/30 text-[10px] font-mono font-bold text-neon-cyan">
+                <span className="px-2.5 py-1 rounded-md bg-zinc-900 border border-neon-cyan/30 text-[10px] font-mono font-bold text-neon-cyan">
                   7FT PUB CLASSIC
                 </span>
-                <span className="text-xs text-neon-lime font-mono font-bold">
+                <span className="text-xs text-emerald-400 font-mono font-bold">
                   {formatZar(32000)} | R2,200/mo
                 </span>
               </div>
@@ -223,7 +213,7 @@ export default function HomePage() {
               <p className="text-xs text-zinc-400 leading-relaxed">
                 South Africa&apos;s tavern champion. Solid Kiaat with anti-cheat mechanical coin drop, heavy brass corners, and high-tensile speed green wool.
               </p>
-              <div className="space-y-1.5 text-xs text-zinc-400 pt-2 border-t border-arcade-border font-mono">
+              <div className="space-y-1.5 text-xs text-zinc-400 pt-2 border-t border-zinc-800/80 font-mono">
                 <div className="flex justify-between">
                   <span>Footprint:</span>
                   <span className="text-white">2.14m × 1.22m</span>
@@ -234,28 +224,28 @@ export default function HomePage() {
                 </div>
                 <div className="flex justify-between">
                   <span>Mechanism:</span>
-                  <span className="text-neon-lime">R5 / R10 ZAR Coin Slot</span>
+                  <span className="text-emerald-400">R5 / R10 ZAR Coin Slot</span>
                 </div>
               </div>
             </div>
 
             <Link
               href="/configurator?size=SEVEN_FOOT_PUB"
-              className="w-full py-3 px-4 rounded-xl bg-neon-cyan/10 hover:bg-neon-cyan/20 border border-neon-cyan/40 text-neon-cyan font-mono font-bold text-xs text-center transition-colors block"
+              className="w-full py-3 px-4 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-neon-cyan/80 btn-hover-glow-cyan font-mono font-semibold text-xs text-center transition-all block"
             >
               Build 7ft in 3D →
             </Link>
           </div>
 
           {/* Card 2 */}
-          <div className="rounded-3xl border-2 border-neon-pink/50 bg-gradient-to-b from-neon-pink/10 via-arcade-card to-arcade-card p-6 space-y-6 flex flex-col justify-between relative shadow-neon-pink">
-            <div className="absolute -top-3 right-6 px-3 py-0.5 rounded-full bg-neon-pink text-white text-[10px] font-mono font-black uppercase tracking-wider shadow-md">
+          <div className="rounded-3xl border border-neon-pink/30 bg-[#080a0f] p-6 space-y-6 flex flex-col justify-between relative shadow-subtle-pink hover:border-neon-pink/60 transition-all">
+            <div className="absolute -top-3 right-6 px-3 py-0.5 rounded-full bg-zinc-900 border border-neon-pink/50 text-neon-pink text-[10px] font-mono font-bold uppercase tracking-wider">
               POPULAR MANCAVE
             </div>
 
             <div className="space-y-4">
               <div className="flex justify-between items-start">
-                <span className="px-2.5 py-1 rounded-md bg-neon-pink/20 border border-neon-pink/40 text-[10px] font-mono font-bold text-neon-pink">
+                <span className="px-2.5 py-1 rounded-md bg-zinc-900 border border-neon-pink/30 text-[10px] font-mono font-bold text-neon-pink">
                   8FT PRO TOURNAMENT
                 </span>
                 <span className="text-xs text-neon-pink font-mono font-bold">
@@ -266,7 +256,7 @@ export default function HomePage() {
               <p className="text-xs text-zinc-300 leading-relaxed">
                 Architectural matte black steel trestle legs with electric blue tournament worsted wool. Optional solid wood dining conversion top.
               </p>
-              <div className="space-y-1.5 text-xs text-zinc-400 pt-2 border-t border-arcade-border font-mono">
+              <div className="space-y-1.5 text-xs text-zinc-400 pt-2 border-t border-zinc-800/80 font-mono">
                 <div className="flex justify-between">
                   <span>Footprint:</span>
                   <span className="text-white">2.44m × 1.32m</span>
@@ -284,17 +274,17 @@ export default function HomePage() {
 
             <Link
               href="/configurator?size=EIGHT_FOOT_PRO"
-              className="w-full py-3 px-4 rounded-xl bg-neon-pink hover:bg-neon-pink/80 text-white font-mono font-bold text-xs text-center transition-colors block shadow-md"
+              className="w-full py-3 px-4 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-neon-pink/80 btn-hover-glow-pink font-mono font-semibold text-xs text-center transition-all block"
             >
               Build 8ft in 3D →
             </Link>
           </div>
 
           {/* Card 3 */}
-          <div className="rounded-3xl border border-arcade-border bg-arcade-card p-6 space-y-6 flex flex-col justify-between hover:border-neon-amber/60 transition-all group">
+          <div className="rounded-3xl border border-zinc-800/90 bg-[#080a0f] p-6 space-y-6 flex flex-col justify-between hover:border-neon-amber/50 hover:shadow-subtle-amber transition-all group">
             <div className="space-y-4">
               <div className="flex justify-between items-start">
-                <span className="px-2.5 py-1 rounded-md bg-neon-amber/10 border border-neon-amber/30 text-[10px] font-mono font-bold text-neon-amber">
+                <span className="px-2.5 py-1 rounded-md bg-zinc-900 border border-neon-amber/30 text-[10px] font-mono font-bold text-neon-amber">
                   12FT SNOOKER ESTATE
                 </span>
                 <span className="text-xs text-neon-amber font-mono font-bold">
@@ -307,7 +297,7 @@ export default function HomePage() {
               <p className="text-xs text-zinc-400 leading-relaxed">
                 Full-scale English championship snooker table with 5-piece matched precision slate, solid turned fluted legs, and handmade English pocket nets.
               </p>
-              <div className="space-y-1.5 text-xs text-zinc-400 pt-2 border-t border-arcade-border font-mono">
+              <div className="space-y-1.5 text-xs text-zinc-400 pt-2 border-t border-zinc-800/80 font-mono">
                 <div className="flex justify-between">
                   <span>Footprint:</span>
                   <span className="text-white">3.85m × 2.05m</span>
@@ -325,7 +315,7 @@ export default function HomePage() {
 
             <Link
               href="/configurator?size=TWELVE_FOOT_SNOOKER"
-              className="w-full py-3 px-4 rounded-xl bg-neon-amber/10 hover:bg-neon-amber/20 border border-neon-amber/40 text-neon-amber font-mono font-bold text-xs text-center transition-colors block"
+              className="w-full py-3 px-4 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-neon-amber/80 transition-all hover:shadow-[0_0_15px_rgba(255,183,0,0.3)] font-mono font-semibold text-xs text-center block"
             >
               Build 12ft in 3D →
             </Link>
@@ -333,9 +323,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* NEON TUBE DIVIDER */}
+      {/* Subtle Hairline Divider */}
       <div className="max-w-6xl mx-auto px-4">
-        <div className="neon-tube-pink" />
+        <div className="borderline-divider-pink" />
       </div>
 
       {/* 3. 🕹️ RETRO & MODERN ARCADE GAMING MACHINES */}
@@ -363,13 +353,13 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Arcade 1 */}
-          <div className="rounded-3xl border border-arcade-border bg-arcade-card p-6 space-y-6 flex flex-col justify-between hover:border-neon-pink/60 transition-all group">
+          <div className="rounded-3xl border border-zinc-800/90 bg-[#080a0f] p-6 space-y-6 flex flex-col justify-between hover:border-neon-pink/50 hover:shadow-subtle-pink transition-all group">
             <div className="space-y-4">
               <div className="flex justify-between items-start">
-                <span className="px-2.5 py-1 rounded-md bg-neon-pink/10 border border-neon-pink/30 text-[10px] font-mono font-bold text-neon-pink">
+                <span className="px-2.5 py-1 rounded-md bg-zinc-900 border border-neon-pink/30 text-[10px] font-mono font-bold text-neon-pink">
                   STAND-UP MULTICADE
                 </span>
-                <span className="text-xs text-neon-lime font-mono font-bold">
+                <span className="text-xs text-emerald-400 font-mono font-bold">
                   {formatZar(19500)} | R1,800/mo
                 </span>
               </div>
@@ -379,7 +369,7 @@ export default function HomePage() {
               <p className="text-xs text-zinc-400 leading-relaxed">
                 Over 3,000 classic 80s/90s arcade titles in one cabinet (Pac-Man, Galaga, Street Fighter II, Metal Slug). Commercial Japanese Sanwa joysticks, glowing LED buttons, and illuminated marquee.
               </p>
-              <div className="space-y-1.5 text-xs text-zinc-400 pt-2 border-t border-arcade-border font-mono">
+              <div className="space-y-1.5 text-xs text-zinc-400 pt-2 border-t border-zinc-800/80 font-mono">
                 <div className="flex justify-between">
                   <span>Display:</span>
                   <span className="text-white">24&quot; HD IPS Low-Lag Screen</span>
@@ -390,7 +380,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex justify-between">
                   <span>Coin Mechanism:</span>
-                  <span className="text-neon-lime">Electronic ZAR Acceptor</span>
+                  <span className="text-emerald-400">Electronic ZAR Acceptor</span>
                 </div>
               </div>
             </div>
@@ -399,20 +389,20 @@ export default function HomePage() {
               href="https://wa.me/27824559812?text=Hi%2C%20I%20am%20interested%20in%20the%20Cyber-Cade%203000%20Arcade%20Machine"
               target="_blank"
               rel="noreferrer"
-              className="w-full py-3 px-4 rounded-xl bg-neon-pink/10 hover:bg-neon-pink/20 border border-neon-pink/40 text-neon-pink font-mono font-bold text-xs text-center transition-colors block"
+              className="w-full py-3 px-4 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-neon-pink/80 btn-hover-glow-pink font-mono font-semibold text-xs text-center transition-all block"
             >
               Order / Rent Multicade →
             </a>
           </div>
 
           {/* Arcade 2 */}
-          <div className="rounded-3xl border border-arcade-border bg-arcade-card p-6 space-y-6 flex flex-col justify-between hover:border-neon-purple/60 transition-all group">
+          <div className="rounded-3xl border border-zinc-800/90 bg-[#080a0f] p-6 space-y-6 flex flex-col justify-between hover:border-neon-purple/50 hover:shadow-subtle-purple transition-all group">
             <div className="space-y-4">
               <div className="flex justify-between items-start">
-                <span className="px-2.5 py-1 rounded-md bg-neon-purple/10 border border-neon-purple/30 text-[10px] font-mono font-bold text-neon-purple">
+                <span className="px-2.5 py-1 rounded-md bg-zinc-900 border border-neon-purple/30 text-[10px] font-mono font-bold text-neon-purple">
                   4-PLAYER DELUXE
                 </span>
-                <span className="text-xs text-neon-lime font-mono font-bold">
+                <span className="text-xs text-emerald-400 font-mono font-bold">
                   {formatZar(26500)} | R2,400/mo
                 </span>
               </div>
@@ -422,7 +412,7 @@ export default function HomePage() {
               <p className="text-xs text-zinc-400 leading-relaxed">
                 Massive 4-player wide deck built for party brawlers: TMNT, Simpsons, NBA Jam, and Sunset Riders. Features high-output stereo sound system and addressable RGB underglow neon.
               </p>
-              <div className="space-y-1.5 text-xs text-zinc-400 pt-2 border-t border-arcade-border font-mono">
+              <div className="space-y-1.5 text-xs text-zinc-400 pt-2 border-t border-zinc-800/80 font-mono">
                 <div className="flex justify-between">
                   <span>Display:</span>
                   <span className="text-white">32&quot; Wide-Angle IPS</span>
@@ -433,7 +423,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex justify-between">
                   <span>Coin Mode:</span>
-                  <span className="text-neon-lime">Freeplay or ZAR Coin Drop</span>
+                  <span className="text-emerald-400">Freeplay or ZAR Coin Drop</span>
                 </div>
               </div>
             </div>
@@ -442,20 +432,20 @@ export default function HomePage() {
               href="https://wa.me/27824559812?text=Hi%2C%20I%20am%20interested%20in%20the%204-Player%20Brawler%20Arcade"
               target="_blank"
               rel="noreferrer"
-              className="w-full py-3 px-4 rounded-xl bg-neon-purple/10 hover:bg-neon-purple/20 border border-neon-purple/40 text-neon-purple font-mono font-bold text-xs text-center transition-colors block"
+              className="w-full py-3 px-4 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-neon-purple/80 transition-all hover:shadow-[0_0_15px_rgba(176,38,255,0.3)] font-mono font-semibold text-xs text-center block"
             >
               Order / Rent 4-Player →
             </a>
           </div>
 
           {/* Arcade 3 */}
-          <div className="rounded-3xl border border-arcade-border bg-arcade-card p-6 space-y-6 flex flex-col justify-between hover:border-neon-cyan/60 transition-all group">
+          <div className="rounded-3xl border border-zinc-800/90 bg-[#080a0f] p-6 space-y-6 flex flex-col justify-between hover:border-neon-cyan/50 hover:shadow-subtle-cyan transition-all group">
             <div className="space-y-4">
               <div className="flex justify-between items-start">
-                <span className="px-2.5 py-1 rounded-md bg-neon-cyan/10 border border-neon-cyan/30 text-[10px] font-mono font-bold text-neon-cyan">
+                <span className="px-2.5 py-1 rounded-md bg-zinc-900 border border-neon-cyan/30 text-[10px] font-mono font-bold text-neon-cyan">
                   4K DIGITAL PINBALL
                 </span>
-                <span className="text-xs text-neon-lime font-mono font-bold">
+                <span className="text-xs text-emerald-400 font-mono font-bold">
                   {formatZar(36000)}
                 </span>
               </div>
@@ -465,7 +455,7 @@ export default function HomePage() {
               <p className="text-xs text-zinc-400 leading-relaxed">
                 43&quot; 4K 120Hz playfield glass with authentic mechanical solenoids and shaker motor that recreate real flipper recoil and ball clatter. Pre-loaded with 500+ iconic tables.
               </p>
-              <div className="space-y-1.5 text-xs text-zinc-400 pt-2 border-t border-arcade-border font-mono">
+              <div className="space-y-1.5 text-xs text-zinc-400 pt-2 border-t border-zinc-800/80 font-mono">
                 <div className="flex justify-between">
                   <span>Playfield:</span>
                   <span className="text-white">43&quot; 4K 120Hz Low Latency</span>
@@ -485,7 +475,7 @@ export default function HomePage() {
               href="https://wa.me/27824559812?text=Hi%2C%20I%20am%20interested%20in%20the%204K%20Virtual%20Pinball"
               target="_blank"
               rel="noreferrer"
-              className="w-full py-3 px-4 rounded-xl bg-neon-cyan/10 hover:bg-neon-cyan/20 border border-neon-cyan/40 text-neon-cyan font-mono font-bold text-xs text-center transition-colors block"
+              className="w-full py-3 px-4 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-neon-cyan/80 btn-hover-glow-cyan font-mono font-semibold text-xs text-center transition-all block"
             >
               Order Virtual Pinball →
             </a>
@@ -493,14 +483,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* NEON TUBE DIVIDER */}
+      {/* Subtle Hairline Divider */}
       <div className="max-w-6xl mx-auto px-4">
-        <div className="neon-tube-lime" />
+        <div className="borderline-divider-lime" />
       </div>
 
       {/* 4. 🎵 NOSTALGIC & DIGITAL JUKEBOXES */}
       <section id="jukeboxes" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-arcade-border pb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-800 pb-6">
           <div className="space-y-1">
             <div className="inline-flex items-center gap-2 text-xs font-mono text-neon-amber uppercase tracking-widest">
               <Disc3 className="w-4 h-4" /> 03 • Sound Systems & Jukeboxes
@@ -516,21 +506,21 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Jukebox 1 */}
-          <div className="rounded-3xl border border-arcade-border bg-arcade-card p-8 space-y-6 flex flex-col justify-between hover:border-neon-amber/60 transition-all">
+          <div className="rounded-3xl border border-zinc-800/90 bg-[#080a0f] p-8 space-y-6 flex flex-col justify-between hover:border-neon-amber/50 hover:shadow-subtle-amber transition-all">
             <div className="space-y-4">
               <div className="flex justify-between items-start">
-                <span className="px-3 py-1 rounded-md bg-neon-amber/20 border border-neon-amber/40 text-xs font-mono font-bold text-neon-amber">
+                <span className="px-3 py-1 rounded-md bg-zinc-900 border border-neon-amber/30 text-xs font-mono font-bold text-neon-amber">
                   NOSTALGIC BUBBLER
                 </span>
-                <span className="text-sm text-neon-lime font-mono font-bold">
+                <span className="text-sm text-emerald-400 font-mono font-bold">
                   {formatZar(28500)} | R1,500/mo
                 </span>
               </div>
               <h3 className="text-2xl font-bold text-white">The &apos;Route 66&apos; Neon Bubble Jukebox</h3>
-              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
                 Authentic 1950s Rock-Ola silhouette with continuous bubbling glass tubes and multi-colored rotating neon cylinders. Modernized with high-fidelity Bluetooth 5.2, USB playback, and physical ZAR coin drop for commercial revenue.
               </p>
-              <div className="grid grid-cols-2 gap-3 pt-3 border-t border-arcade-border text-xs font-mono">
+              <div className="grid grid-cols-2 gap-3 pt-3 border-t border-zinc-800/80 text-xs font-mono">
                 <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
                   <div className="text-zinc-500 text-[10px]">LIGHTING</div>
                   <div className="text-neon-amber font-bold mt-0.5">Liquid Bubbles + Neon LEDs</div>
@@ -546,28 +536,28 @@ export default function HomePage() {
               href="https://wa.me/27824559812?text=Hi%2C%20I%20am%20interested%20in%20the%20Route%2066%20Bubble%20Jukebox"
               target="_blank"
               rel="noreferrer"
-              className="w-full py-3.5 px-4 rounded-xl bg-neon-amber/20 hover:bg-neon-amber/30 border border-neon-amber text-neon-amber font-mono font-bold text-xs text-center transition-colors block"
+              className="w-full py-3.5 px-4 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-neon-amber/80 transition-all hover:shadow-[0_0_15px_rgba(255,183,0,0.3)] font-mono font-semibold text-xs text-center block"
             >
               Order Bubble Jukebox →
             </a>
           </div>
 
           {/* Jukebox 2 */}
-          <div className="rounded-3xl border border-arcade-border bg-arcade-card p-8 space-y-6 flex flex-col justify-between hover:border-neon-cyan/60 transition-all">
+          <div className="rounded-3xl border border-zinc-800/90 bg-[#080a0f] p-8 space-y-6 flex flex-col justify-between hover:border-neon-cyan/50 hover:shadow-subtle-cyan transition-all">
             <div className="space-y-4">
               <div className="flex justify-between items-start">
-                <span className="px-3 py-1 rounded-md bg-neon-cyan/20 border border-neon-cyan/40 text-xs font-mono font-bold text-neon-cyan">
+                <span className="px-3 py-1 rounded-md bg-zinc-900 border border-neon-cyan/30 text-xs font-mono font-bold text-neon-cyan">
                   DIGITAL TOUCH PRO
                 </span>
-                <span className="text-sm text-neon-lime font-mono font-bold">
+                <span className="text-sm text-emerald-400 font-mono font-bold">
                   {formatZar(22000)} | R1,400/mo
                 </span>
               </div>
               <h3 className="text-2xl font-bold text-white">The &apos;Nightclub Pro&apos; Wall Touch Jukebox</h3>
-              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
                 Space-saving wall-mounted digital jukebox with 19&quot; capacitive touchscreen. Over 50,000 pre-installed licensed songs spanning rock, jazz, amapiano, and pop, with smart search and bar staff volume override.
               </p>
-              <div className="grid grid-cols-2 gap-3 pt-3 border-t border-arcade-border text-xs font-mono">
+              <div className="grid grid-cols-2 gap-3 pt-3 border-t border-zinc-800/80 text-xs font-mono">
                 <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
                   <div className="text-zinc-500 text-[10px]">SCREEN</div>
                   <div className="text-neon-cyan font-bold mt-0.5">19&quot; Anti-Glare Touch</div>
@@ -583,7 +573,7 @@ export default function HomePage() {
               href="https://wa.me/27824559812?text=Hi%2C%20I%20am%20interested%20in%20the%20Digital%20Wall%20Jukebox"
               target="_blank"
               rel="noreferrer"
-              className="w-full py-3.5 px-4 rounded-xl bg-neon-cyan/20 hover:bg-neon-cyan/30 border border-neon-cyan text-neon-cyan font-mono font-bold text-xs text-center transition-colors block"
+              className="w-full py-3.5 px-4 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-neon-cyan/80 btn-hover-glow-cyan font-mono font-semibold text-xs text-center transition-all block"
             >
               Order Wall Jukebox →
             </a>
@@ -591,11 +581,16 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Subtle Hairline Divider */}
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="borderline-divider-cyan" />
+      </div>
+
       {/* 5. ⚡ ACCESSORIES & NEON CANOPY LIGHTING */}
       <section id="accessories" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="border-b border-arcade-border pb-6 space-y-1">
-          <div className="inline-flex items-center gap-2 text-xs font-mono text-neon-purple uppercase tracking-widest">
-            <Lightbulb className="w-4 h-4" /> 04 • Lighting, Neon & Billiard Gear
+        <div className="border-b border-zinc-800/80 pb-6 space-y-1">
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-zinc-400 uppercase tracking-widest">
+            <Lightbulb className="w-4 h-4 text-neon-purple/80" /> 04 • Lighting, Neon & Billiard Gear
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-mono">
             OVERHEAD CANOPIES & NEON ART
@@ -606,58 +601,63 @@ export default function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="p-6 rounded-2xl bg-arcade-card border border-arcade-border space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-neon-purple/20 border border-neon-purple/40 flex items-center justify-center text-neon-purple">
+          <div className="p-6 rounded-2xl bg-[#080a0f] border border-zinc-800/80 hover:border-zinc-700 hover:shadow-subtle-purple transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-neon-purple/30 flex items-center justify-center text-neon-purple">
               <Lightbulb className="w-5 h-5" />
             </div>
             <h4 className="text-base font-bold text-white">Overhead LED Table Canopy</h4>
             <p className="text-xs text-zinc-400">
               Tournament shadowless 1.8m suspended matte black LED hood. Zero shadows under balls.
             </p>
-            <div className="text-xs font-mono font-bold text-neon-purple">{formatZar(4800)}</div>
+            <div className="text-xs font-mono font-bold text-zinc-200">{formatZar(4800)}</div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-arcade-card border border-arcade-border space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-neon-pink/20 border border-neon-pink/40 flex items-center justify-center text-neon-pink">
+          <div className="p-6 rounded-2xl bg-[#080a0f] border border-zinc-800/80 hover:border-zinc-700 hover:shadow-subtle-pink transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-neon-pink/30 flex items-center justify-center text-neon-pink">
               <Flame className="w-5 h-5" />
             </div>
             <h4 className="text-base font-bold text-white">Custom Neon Wall Art</h4>
             <p className="text-xs text-zinc-400">
               Hand-bent LED neon signs: &quot;BILLIARDS&quot;, &quot;INSERT COIN&quot;, or your pub&apos;s custom logo.
             </p>
-            <div className="text-xs font-mono font-bold text-neon-pink">{formatZar(3200)}</div>
+            <div className="text-xs font-mono font-bold text-zinc-200">{formatZar(3200)}</div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-arcade-card border border-arcade-border space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-neon-cyan/20 border border-neon-cyan/40 flex items-center justify-center text-neon-cyan">
+          <div className="p-6 rounded-2xl bg-[#080a0f] border border-zinc-800/80 hover:border-zinc-700 hover:shadow-subtle-cyan transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-neon-cyan/30 flex items-center justify-center text-neon-cyan">
               <Trophy className="w-5 h-5" />
             </div>
             <h4 className="text-base font-bold text-white">Aramith Pro Ball Sets</h4>
             <p className="text-xs text-zinc-400">
               Phenolic resin tournament balls with laser-straight spin balance and high impact resistance.
             </p>
-            <div className="text-xs font-mono font-bold text-neon-cyan">{formatZar(2600)}</div>
+            <div className="text-xs font-mono font-bold text-zinc-200">{formatZar(2600)}</div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-arcade-card border border-arcade-border space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-neon-lime/20 border border-neon-lime/40 flex items-center justify-center text-neon-lime">
+          <div className="p-6 rounded-2xl bg-[#080a0f] border border-zinc-800/80 hover:border-zinc-700 hover:shadow-subtle-lime transition-all space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-neon-lime/30 flex items-center justify-center text-neon-lime">
               <Coins className="w-5 h-5" />
             </div>
             <h4 className="text-base font-bold text-white">Deluxe Cue Stands & Tokens</h4>
             <p className="text-xs text-zinc-400">
               Solid Kiaat wall-mounted cue holders, short 48&quot;/36&quot; cues, and branded metal arcade tokens.
             </p>
-            <div className="text-xs font-mono font-bold text-neon-lime">{formatZar(1800)}</div>
+            <div className="text-xs font-mono font-bold text-zinc-200">{formatZar(1800)}</div>
           </div>
         </div>
       </section>
 
+      {/* Subtle Hairline Divider */}
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="borderline-divider-lime" />
+      </div>
+
       {/* 6. 📸 PAST PROJECTS & REAL VENUE INSTALLATIONS */}
       <section id="projects" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-arcade-border pb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-800/80 pb-6">
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 text-xs font-mono text-neon-lime uppercase tracking-widest">
-              <Camera className="w-4 h-4" /> 05 • Real-World Portfolio
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-zinc-400 uppercase tracking-widest">
+              <Camera className="w-4 h-4 text-emerald-400" /> 05 • Real-World Portfolio
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-mono">
               PAST PROJECTS & VENUE FITOUTS
@@ -668,15 +668,15 @@ export default function HomePage() {
           </div>
 
           {/* Filter tabs */}
-          <div className="flex gap-2 bg-arcade-card p-1.5 rounded-2xl border border-arcade-border text-xs font-mono">
+          <div className="flex gap-2 bg-zinc-950 p-1.5 rounded-2xl border border-zinc-800 text-xs font-mono">
             {(['ALL', 'PUBS', 'MANCAVES', 'CORPORATE'] as const).map((cat) => (
               <button
                 key={cat}
                 type="button"
                 onClick={() => setGalleryFilter(cat)}
-                className={`px-3 py-1.5 rounded-xl transition-colors font-bold ${
+                className={`px-3 py-1.5 rounded-xl transition-all font-semibold ${
                   galleryFilter === cat
-                    ? 'bg-neon-lime text-black shadow-[0_0_10px_#39ff14]'
+                    ? 'bg-white text-black shadow-sm'
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
@@ -690,31 +690,31 @@ export default function HomePage() {
           {filteredProjects.map((proj) => (
             <div
               key={proj.id}
-              className="rounded-3xl border border-arcade-border bg-arcade-card overflow-hidden hover:border-neon-lime/60 transition-all group space-y-4 flex flex-col justify-between"
+              className="rounded-3xl border border-zinc-800/90 bg-[#080a0f] overflow-hidden hover:border-zinc-700 hover:shadow-subtle-cyan transition-all group space-y-4 flex flex-col justify-between"
             >
               <div className="space-y-4">
                 <div
                   className="h-64 bg-cover bg-center relative"
                   style={{ backgroundImage: `url('${proj.imageUrl}')` }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-t from-arcade-card via-arcade-card/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080a0f] via-[#080a0f]/20 to-transparent" />
                   <div className="absolute top-4 left-4 flex gap-2">
-                    <span className="px-3 py-1 rounded-full bg-black/80 backdrop-blur border border-neon-lime/50 text-[10px] font-mono text-neon-lime font-bold">
+                    <span className="px-3 py-1 rounded-full bg-black/80 backdrop-blur border border-zinc-700 text-[10px] font-mono text-zinc-200 font-bold">
                       {proj.badge}
                     </span>
                   </div>
                   <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                    <div className="text-xs font-mono text-zinc-300 font-bold bg-black/60 px-2.5 py-1 rounded-lg backdrop-blur">
+                    <div className="text-xs font-mono text-zinc-300 font-semibold bg-black/70 px-2.5 py-1 rounded-lg backdrop-blur border border-zinc-800">
                       📍 {proj.location}
                     </div>
                   </div>
                 </div>
 
                 <div className="px-6 space-y-2">
-                  <h3 className="text-xl font-bold text-white group-hover:text-neon-lime transition-colors">
+                  <h3 className="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors">
                     {proj.title}
                   </h3>
-                  <div className="text-xs text-neon-cyan font-mono font-semibold">
+                  <div className="text-xs text-zinc-400 font-mono">
                     {proj.equipment}
                   </div>
                   <p className="text-xs text-zinc-400 leading-relaxed">{proj.desc}</p>
@@ -722,9 +722,9 @@ export default function HomePage() {
               </div>
 
               <div className="px-6 pb-6 pt-2">
-                <div className="p-3 rounded-xl bg-zinc-950/80 border border-zinc-800 text-[11px] text-zinc-500 font-mono flex items-center justify-between">
+                <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800/80 text-[11px] text-zinc-400 font-mono flex items-center justify-between">
                   <span>Delivered & Leveled by M-Games Team</span>
-                  <span className="text-emerald-400 font-bold">✓ 0.00° Level Cert</span>
+                  <span className="text-emerald-400 font-semibold">✓ 0.00° Precision Cert</span>
                 </div>
               </div>
             </div>
@@ -732,24 +732,29 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Subtle Hairline Divider */}
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="borderline-divider-cyan" />
+      </div>
+
       {/* 7. COMBINED MULTI-PRODUCT VENUE LEASING CALCULATOR */}
       <section id="commercial" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-neon-cyan/40 bg-gradient-to-br from-[#0c1426] via-arcade-card to-[#060810] p-8 sm:p-12 relative overflow-hidden shadow-2xl">
+        <div className="rounded-3xl border border-neon-cyan/25 bg-[#06080d] p-8 sm:p-12 relative overflow-hidden shadow-[0_0_15px_rgba(0,240,255,0.06)]">
           <div className="max-w-3xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-neon-cyan/20 border border-neon-cyan/50 text-neon-cyan text-xs font-mono uppercase tracking-widest font-bold">
-              <Coins className="w-3.5 h-3.5 text-neon-lime" /> B2B Commercial Package Bundle Simulator
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-mono uppercase tracking-wider font-semibold">
+              <Coins className="w-3.5 h-3.5 text-emerald-400" /> B2B Commercial Package Bundle Simulator
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-mono">
               COMBINED ENTERTAINMENT CASHFLOW SIMULATOR
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
               Bundle pool tables, arcade multicades, and jukeboxes together. See your combined coin-op cash collection versus monthly fixed lease cost.
             </p>
           </div>
 
           <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Controls (7 Cols) */}
-            <div className="lg:col-span-7 space-y-5 bg-zinc-950/80 p-6 rounded-2xl border border-zinc-800">
+            <div className="lg:col-span-7 space-y-5 bg-zinc-950/90 p-6 rounded-2xl border border-zinc-800/80">
               {/* Table Count */}
               <div className="space-y-1.5">
                 <div className="flex justify-between text-xs">
@@ -799,10 +804,10 @@ export default function HomePage() {
               </div>
 
               {/* Traffic slider */}
-              <div className="space-y-1.5 pt-2 border-t border-zinc-800">
+              <div className="space-y-1.5 pt-2 border-t border-zinc-800/80">
                 <div className="flex justify-between text-xs">
                   <span className="text-zinc-300 font-bold font-mono">Avg Daily Plays per Table:</span>
-                  <span className="text-neon-lime font-mono font-bold">{gamesPerDay} Plays / day</span>
+                  <span className="text-emerald-400 font-mono font-bold">{gamesPerDay} Plays / day</span>
                 </div>
                 <input
                   type="range"
@@ -811,13 +816,13 @@ export default function HomePage() {
                   step="5"
                   value={gamesPerDay}
                   onChange={(e) => setGamesPerDay(parseInt(e.target.value))}
-                  className="w-full accent-neon-lime cursor-pointer"
+                  className="w-full accent-emerald-400 cursor-pointer"
                 />
               </div>
             </div>
 
             {/* Cashflow Card (5 Cols) */}
-            <div className="lg:col-span-5 rounded-2xl bg-gradient-to-b from-arcade-card to-[#04060a] p-6 border border-neon-cyan/50 space-y-6 text-center shadow-neon-cyan">
+            <div className="lg:col-span-5 rounded-2xl bg-zinc-950 p-6 border border-neon-cyan/30 space-y-6 text-center shadow-subtle-cyan">
               <div className="space-y-1">
                 <div className="text-xs text-zinc-400 font-mono">EST. COMBINED MONTHLY COIN GROSS</div>
                 <div className="text-3xl font-black text-white font-mono">
@@ -828,14 +833,14 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-zinc-950 border border-zinc-800 text-xs space-y-2 font-mono">
+              <div className="p-4 rounded-xl bg-[#080a0f] border border-zinc-800/80 text-xs space-y-2 font-mono">
                 <div className="flex justify-between text-zinc-400">
                   <span>Total Package Lease:</span>
                   <span className="text-zinc-300">-{formatZar(packageLeaseCost)}</span>
                 </div>
                 <div className="flex justify-between items-baseline pt-2 border-t border-zinc-800 text-white font-bold">
-                  <span className="text-xs text-neon-lime">Net Passive Venue Profit:</span>
-                  <span className="text-2xl font-black text-neon-lime">
+                  <span className="text-xs text-zinc-400">Net Passive Venue Profit:</span>
+                  <span className="text-2xl font-black text-emerald-400">
                     +{formatZar(netVenueProfit)} / mo
                   </span>
                 </div>
@@ -843,7 +848,7 @@ export default function HomePage() {
 
               <Link
                 href="/commercial/planner"
-                className="w-full py-4 px-4 rounded-xl bg-gradient-to-r from-neon-cyan via-neon-blue to-neon-purple hover:from-neon-cyan hover:to-neon-pink text-black font-black text-xs font-mono tracking-wider shadow-neon-cyan transition-all flex items-center justify-center gap-2 block active:scale-95"
+                className="w-full py-3.5 px-4 rounded-xl bg-white text-black font-bold text-xs font-mono tracking-wider hover:bg-zinc-100 btn-hover-glow-white transition-all flex items-center justify-center gap-2 block active:scale-95 shadow-sm"
               >
                 TEST VENUE FIT ON CAD PLANNER
                 <ArrowRight className="w-4 h-4" />

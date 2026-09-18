@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #05060a;
-  --foreground: #f8fafc;
+  --background: #030305;
+  --foreground: #f4f4f5;
 }
 
 body {
@@ -12,56 +12,94 @@ body {
   color: var(--foreground);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   overflow-x: hidden;
-  background-image: 
-    radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 85% 30%, rgba(255, 0, 127, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 15% 70%, rgba(176, 38, 255, 0.05) 0%, transparent 40%);
 }
 
-/* Neon Glow Typography Utilities */
-.neon-glow-cyan {
-  text-shadow: 0 0 7px rgba(0, 240, 255, 0.8), 0 0 16px rgba(0, 240, 255, 0.5), 0 0 28px rgba(0, 240, 255, 0.3);
-}
-
-.neon-glow-pink {
-  text-shadow: 0 0 7px rgba(255, 0, 127, 0.8), 0 0 16px rgba(255, 0, 127, 0.5), 0 0 28px rgba(255, 0, 127, 0.3);
-}
-
-.neon-glow-lime {
-  text-shadow: 0 0 7px rgba(57, 255, 20, 0.8), 0 0 16px rgba(57, 255, 20, 0.5), 0 0 28px rgba(57, 255, 20, 0.3);
-}
-
-.neon-glow-amber {
-  text-shadow: 0 0 7px rgba(255, 183, 0, 0.8), 0 0 16px rgba(255, 183, 0, 0.5), 0 0 28px rgba(255, 183, 0, 0.3);
-}
-
+/* Crisp Typography (eliminating blurry neon halos for premium readability) */
+.neon-glow-cyan,
+.neon-glow-pink,
+.neon-glow-lime,
+.neon-glow-amber,
 .neon-glow-purple {
-  text-shadow: 0 0 7px rgba(176, 38, 255, 0.8), 0 0 16px rgba(176, 38, 255, 0.5), 0 0 28px rgba(176, 38, 255, 0.3);
+  text-shadow: none;
 }
 
-/* Glowing Neon Tube Dividers */
-.neon-tube-cyan {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #00f0ff, transparent);
-  box-shadow: 0 0 10px #00f0ff, 0 0 20px rgba(0, 240, 255, 0.5);
+/* Subtle Outline / Borderline Glow (Delicate 1px outline with soft ambient trace) */
+.borderline-glow-cyan {
+  border: 1px solid rgba(0, 240, 255, 0.28);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.08);
 }
 
-.neon-tube-pink {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #ff007f, transparent);
-  box-shadow: 0 0 10px #ff007f, 0 0 20px rgba(255, 0, 127, 0.5);
+.borderline-glow-pink {
+  border: 1px solid rgba(255, 0, 127, 0.28);
+  box-shadow: 0 0 10px rgba(255, 0, 127, 0.08);
 }
 
-.neon-tube-lime {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #39ff14, transparent);
-  box-shadow: 0 0 10px #39ff14, 0 0 20px rgba(57, 255, 20, 0.5);
+.borderline-glow-lime {
+  border: 1px solid rgba(57, 255, 20, 0.28);
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.08);
 }
 
-/* Subtle Retro Grid Floor Overlay */
+.borderline-glow-amber {
+  border: 1px solid rgba(255, 183, 0, 0.28);
+  box-shadow: 0 0 10px rgba(255, 183, 0, 0.08);
+}
+
+.borderline-glow-purple {
+  border: 1px solid rgba(176, 38, 255, 0.28);
+  box-shadow: 0 0 10px rgba(176, 38, 255, 0.08);
+}
+
+/* Button Hover Glow (Luminous responsive glow upon mouse hover) */
+.btn-hover-glow-cyan {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-hover-glow-cyan:hover {
+  border-color: rgba(0, 240, 255, 0.75);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+}
+
+.btn-hover-glow-pink {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-hover-glow-pink:hover {
+  border-color: rgba(255, 0, 127, 0.75);
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.35);
+}
+
+.btn-hover-glow-white {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-hover-glow-white:hover {
+  border-color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+}
+
+/* Refined 1px Borderline Dividers with Subtle Center Glow */
+.neon-tube-cyan,
+.borderline-divider-cyan {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.35), transparent);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.12);
+}
+
+.neon-tube-pink,
+.borderline-divider-pink {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 0, 127, 0.35), transparent);
+  box-shadow: 0 0 8px rgba(255, 0, 127, 0.12);
+}
+
+.neon-tube-lime,
+.borderline-divider-lime {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(57, 255, 20, 0.35), transparent);
+  box-shadow: 0 0 8px rgba(57, 255, 20, 0.12);
+}
+
+/* Subtle Floor Grid */
 .arcade-grid-bg {
-  background-size: 36px 36px;
+  background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(26, 34, 54, 0.35) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(26, 34, 54, 0.35) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 }

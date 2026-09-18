@@ -19,70 +19,70 @@ export default function RootLayout({
           content="South Africa's premier commercial & residential gaming powerhouse. Custom slate pool tables, 3000+ game retro arcades, illuminated bubble jukeboxes, and venue leasing since 1994."
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#05060a] text-zinc-100 selection:bg-neon-cyan selection:text-black antialiased arcade-grid-bg">
-        {/* Neon High-Voltage Announcement Marquee */}
-        <div className="relative bg-gradient-to-r from-neon-purple/20 via-neon-pink/20 to-neon-cyan/20 border-b border-neon-cyan/30 text-[11px] py-1.5 px-4 text-center font-mono tracking-wider flex items-center justify-center gap-3 overflow-hidden">
-          <span className="flex items-center gap-1.5 text-neon-cyan font-bold">
-            <span className="w-2 h-2 rounded-full bg-neon-cyan animate-pulse shadow-[0_0_8px_#00f0ff]" />
+      <body className="min-h-screen flex flex-col bg-[#030305] text-zinc-100 selection:bg-neon-cyan selection:text-black antialiased arcade-grid-bg">
+        {/* Sleek Announcement Marquee */}
+        <div className="relative bg-[#07090e] border-b border-zinc-800/80 text-[11px] py-2 px-4 text-center font-mono tracking-wider flex items-center justify-center gap-3 overflow-hidden">
+          <span className="flex items-center gap-1.5 text-zinc-300 font-bold">
+            <span className="w-1.5 h-1.5 rounded-full bg-neon-cyan shadow-[0_0_6px_#00f0ff]" />
             LIVE LEASING DESK
           </span>
-          <span className="text-zinc-500">|</span>
-          <span className="text-zinc-300">
-            Pool Tables • Arcade Multicades • Neon Jukeboxes • B2B Venue Packages Available
+          <span className="text-zinc-600">|</span>
+          <span className="text-zinc-400">
+            Pool Tables • Arcade Multicades • Neon Jukeboxes • B2B Venue Packages
           </span>
-          <span className="text-zinc-500">|</span>
+          <span className="text-zinc-600">|</span>
           <a
             href="tel:+27824559812"
-            className="text-neon-pink hover:text-white font-bold transition-colors"
+            className="text-neon-cyan hover:text-white font-bold transition-colors"
           >
             Direct: +27 (0)82 455 9812
           </a>
         </div>
 
         {/* Header */}
-        <header className="sticky top-0 z-50 border-b border-arcade-border/80 bg-[#05060a]/90 backdrop-blur-xl">
+        <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-[#030305]/90 backdrop-blur-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-neon-cyan via-neon-pink to-neon-purple text-black font-black text-2xl shadow-neon-cyan group-hover:scale-105 transition-all">
-                <span className="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">M</span>
-                <div className="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-neon-lime border-2 border-black shadow-[0_0_8px_#39ff14]" />
+              <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-zinc-900 border border-neon-cyan/40 text-white font-black text-xl shadow-subtle-cyan group-hover:border-neon-cyan group-hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all">
+                <span>M</span>
+                <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 rounded-full bg-neon-lime border-2 border-black" />
               </div>
               <div className="flex flex-col">
-                <span className="font-extrabold tracking-widest text-white text-lg font-mono neon-glow-cyan">
+                <span className="font-extrabold tracking-wider text-white text-base font-mono">
                   M-GAMES
                 </span>
-                <span className="text-[9px] text-neon-pink tracking-[0.25em] font-mono -mt-1 font-bold">
+                <span className="text-[9px] text-zinc-400 tracking-[0.22em] font-mono font-semibold">
                   AMUSEMENTS & BILLIARDS
                 </span>
               </div>
             </Link>
 
             {/* Navigation links */}
-            <nav className="hidden xl:flex items-center gap-7 text-xs font-bold uppercase tracking-wider text-zinc-300">
+            <nav className="hidden xl:flex items-center gap-7 text-xs font-semibold uppercase tracking-wider text-zinc-400">
               <Link href="/#pool" className="hover:text-neon-cyan transition-colors flex items-center gap-1.5">
-                <Trophy className="w-3.5 h-3.5 text-neon-cyan" />
+                <Trophy className="w-3.5 h-3.5 text-neon-cyan/70" />
                 Pool Tables
               </Link>
               <Link href="/#arcades" className="hover:text-neon-pink transition-colors flex items-center gap-1.5">
-                <Gamepad2 className="w-3.5 h-3.5 text-neon-pink" />
+                <Gamepad2 className="w-3.5 h-3.5 text-neon-pink/70" />
                 Arcades
               </Link>
               <Link href="/#jukeboxes" className="hover:text-neon-amber transition-colors flex items-center gap-1.5">
-                <Disc3 className="w-3.5 h-3.5 text-neon-amber" />
+                <Disc3 className="w-3.5 h-3.5 text-neon-amber/70" />
                 Jukeboxes
               </Link>
-              <Link href="/#accessories" className="hover:text-neon-purple transition-colors">
+              <Link href="/#accessories" className="hover:text-zinc-200 transition-colors">
                 Lighting & Gear
               </Link>
               <Link href="/#projects" className="hover:text-neon-lime transition-colors flex items-center gap-1.5">
-                <Camera className="w-3.5 h-3.5 text-neon-lime" />
+                <Camera className="w-3.5 h-3.5 text-neon-lime/70" />
                 Past Projects
               </Link>
-              <Link href="/configurator" className="hover:text-neon-cyan transition-colors text-neon-cyan">
+              <Link href="/configurator" className="hover:text-neon-cyan transition-colors text-zinc-300">
                 3D Configurator
               </Link>
-              <Link href="/commercial/planner" className="hover:text-neon-pink transition-colors">
+              <Link href="/commercial/planner" className="hover:text-zinc-200 transition-colors">
                 2D CAD Planner
               </Link>
             </nav>
@@ -91,14 +91,14 @@ export default function RootLayout({
             <div className="flex items-center gap-3">
               <Link
                 href="/commercial/planner"
-                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2.5 rounded-xl border border-neon-cyan/50 text-neon-cyan bg-neon-cyan/10 hover:bg-neon-cyan/20 transition-all shadow-[0_0_12px_rgba(0,240,255,0.2)] font-mono"
+                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2.5 rounded-xl border border-zinc-800 bg-zinc-900/80 text-zinc-300 hover:text-white hover:border-neon-cyan/70 btn-hover-glow-cyan font-mono"
               >
-                <Compass className="w-3.5 h-3.5" />
+                <Compass className="w-3.5 h-3.5 text-neon-cyan" />
                 Venue Planner
               </Link>
               <Link
                 href="/configurator"
-                className="inline-flex items-center justify-center text-xs font-black px-5 py-2.5 rounded-xl bg-gradient-to-r from-neon-pink to-neon-purple hover:from-neon-pink hover:to-neon-pink text-white shadow-neon-pink transition-all active:scale-95 font-mono tracking-wider"
+                className="inline-flex items-center justify-center text-xs font-bold px-5 py-2.5 rounded-xl bg-white text-black hover:bg-zinc-100 btn-hover-glow-white active:scale-95 font-mono tracking-wider"
               >
                 BUILD TABLE
               </Link>
@@ -109,19 +109,19 @@ export default function RootLayout({
         {/* Content */}
         <main className="flex-1">{children}</main>
 
-        {/* Neon Footer */}
-        <footer className="border-t border-arcade-border bg-[#030407] text-zinc-400 text-xs pt-16 pb-12 relative overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-neon-pink via-neon-cyan to-neon-lime shadow-[0_0_15px_#00f0ff]" />
+        {/* Sleek Dark Footer */}
+        <footer className="border-t border-zinc-800/80 bg-[#020204] text-zinc-400 text-xs pt-16 pb-12 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-neon-cyan/40 to-transparent shadow-[0_0_8px_rgba(0,240,255,0.15)]" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
               {/* Brand Col */}
               <div className="md:col-span-2 space-y-4">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-neon-cyan to-neon-pink flex items-center justify-center font-black text-black text-base shadow-neon-cyan">
+                  <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-neon-cyan/30 flex items-center justify-center font-black text-white text-sm shadow-subtle-cyan">
                     M
                   </div>
-                  <span className="font-extrabold text-white text-base tracking-widest font-mono neon-glow-cyan">
+                  <span className="font-extrabold text-white text-base tracking-wider font-mono">
                     M-GAMES AMUSEMENTS
                   </span>
                 </div>
