@@ -21,6 +21,7 @@ import {
   ChevronRight,
   ChevronDown,
   CheckCircle2,
+  User,
 } from 'lucide-react';
 import { AccountWidget } from '@/components/account-widget';
 
@@ -245,6 +246,19 @@ export default function RootLayout({
                     <span>LAUNCH STUDIO DESIGNER</span>
                   </span>
                   <span className="text-xs text-neon-cyan font-mono">3D & CAD →</span>
+                </Link>
+
+                {/* Dedicated Account Portal Tile */}
+                <Link
+                  href="/account"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full p-3.5 rounded-2xl bg-zinc-950 border border-zinc-800 text-white font-mono text-xs flex items-center justify-between hover:border-zinc-700 transition-colors"
+                >
+                  <span className="flex items-center gap-2.5 font-bold">
+                    <User className="w-4 h-4 text-emerald-400" />
+                    <span>MY ACCOUNT & ORDERS</span>
+                  </span>
+                  <span className="text-[10px] text-zinc-500 font-mono">Open Portal →</span>
                 </Link>
 
                 {/* GAMES Category */}

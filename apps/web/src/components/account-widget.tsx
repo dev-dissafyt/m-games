@@ -202,14 +202,18 @@ export function AccountWidget() {
       {/* Dropdown Menu */}
       {menuOpen && currentUser && (
         <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-[#080a0f] border border-zinc-800 shadow-2xl p-4 z-50 space-y-4 animate-in fade-in zoom-in-95 duration-100 font-sans">
-          {/* Client Header Info */}
-          <div className="flex items-start justify-between border-b border-zinc-800/80 pb-3">
+          {/* Client Header Info - click to view /account */}
+          <Link
+            href="/account"
+            onClick={() => setMenuOpen(false)}
+            className="flex items-start justify-between border-b border-zinc-800/80 pb-3 hover:bg-zinc-900/40 p-1.5 -m-1.5 rounded-xl transition-all group/head"
+          >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-zinc-800 to-zinc-900 border border-neon-cyan/40 flex items-center justify-center text-neon-cyan font-bold font-mono text-sm shadow-[0_0_10px_rgba(0,240,255,0.2)]">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-zinc-800 to-zinc-900 border border-neon-cyan/40 flex items-center justify-center text-neon-cyan font-bold font-mono text-sm shadow-[0_0_10px_rgba(0,240,255,0.2)] group-hover/head:border-neon-cyan">
                 {getInitials(currentUser.name)}
               </div>
               <div>
-                <div className="text-sm font-bold text-white flex items-center gap-1.5">
+                <div className="text-sm font-bold text-white flex items-center gap-1.5 group-hover/head:text-neon-cyan transition-colors">
                   {currentUser.name}
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 </div>
@@ -222,7 +226,7 @@ export function AccountWidget() {
             <span className="text-[9px] font-mono font-semibold px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-800/80">
               ACTIVE CLIENT
             </span>
-          </div>
+          </Link>
 
           {/* Active Order Card */}
           <div className="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800/90 space-y-2.5">
@@ -276,6 +280,18 @@ export function AccountWidget() {
 
           {/* Actions */}
           <div className="space-y-1.5 pt-1">
+            <Link
+              href="/account"
+              onClick={() => setMenuOpen(false)}
+              className="w-full py-2.5 px-3 rounded-xl bg-zinc-900 border border-zinc-700 hover:border-white text-white text-xs font-bold font-mono flex items-center justify-between transition-all group"
+            >
+              <span className="flex items-center gap-2">
+                <UserCheck className="w-3.5 h-3.5 text-emerald-400" />
+                Open Account Portal
+              </span>
+              <ArrowRight className="w-3.5 h-3.5 text-zinc-400 group-hover:text-white group-hover:translate-x-0.5 transition-all" />
+            </Link>
+
             <Link
               href="/designer"
               onClick={() => setMenuOpen(false)}
@@ -377,20 +393,29 @@ export function AccountWidget() {
             </div>
 
             <div className="pt-2 border-t border-zinc-800 flex items-center justify-between text-xs font-mono">
-              <button
-                type="button"
-                onClick={() => selectUser(null)}
-                className="text-zinc-400 hover:text-white transition-colors"
-              >
-                Continue as Guest
-              </button>
-              <button
-                type="button"
+              <Link
+                href="/account"
                 onClick={() => setShowSwitchModal(false)}
-                className="px-4 py-2 rounded-xl bg-zinc-800 text-white font-bold hover:bg-zinc-700 transition-colors"
+                className="text-neon-cyan hover:underline flex items-center gap-1 font-bold"
               >
-                Cancel
-              </button>
+                Go to Account Portal →
+              </Link>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => selectUser(null)}
+                  className="text-zinc-400 hover:text-white transition-colors"
+                >
+                  Guest
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowSwitchModal(false)}
+                  className="px-3.5 py-1.5 rounded-xl bg-zinc-800 text-white font-bold hover:bg-zinc-700 transition-colors"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
         </div>
