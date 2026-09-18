@@ -240,171 +240,185 @@ export default function RootLayout({
             </div>
           </div>
 
-          {/* Mobile Sliding Drawer Navigation - Full-Screen Overlay with Dedicated Header */}
+          {/* Mobile Menu Modal with Solid Elevated Background, Border & Dimmed Backdrop */}
           {mobileMenuOpen && (
-            <div className="md:hidden fixed inset-0 z-50 bg-[#030305] flex flex-col">
-              {/* Drawer Header Bar */}
-              <div className="h-16 px-4 sm:px-6 flex items-center justify-between border-b border-zinc-800/80 bg-[#030305] shrink-0">
-                <Link
-                  href="/"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2.5 group"
-                >
-                  <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-zinc-900 border border-neon-cyan/40 text-white font-black text-lg shadow-subtle-cyan">
-                    <span>M</span>
-                    <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-neon-lime border-2 border-black" />
-                  </div>
-                  <span className="font-extrabold tracking-wider text-white text-base font-mono">
-                    M-GAMES
-                  </span>
-                </Link>
-
-                <div className="flex items-center gap-2">
-                  <AccountWidget />
-                  <button
-                    type="button"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white transition-colors"
-                    aria-label="Close Navigation Menu"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Scrollable Navigation Body */}
-              <div className="flex-1 overflow-y-auto overscroll-contain px-4 sm:px-6 py-5 pb-36 space-y-5">
-                {/* Primary Studio Action */}
-                <Link
-                  href="/designer"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full p-4 rounded-2xl bg-gradient-to-r from-neon-cyan/20 via-zinc-900 to-zinc-900 border border-neon-cyan/50 text-white font-mono font-bold flex items-center justify-between shadow-lg shadow-neon-cyan/5 active:scale-[0.99] transition-transform"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <Sparkles className="w-4 h-4 text-neon-cyan" />
-                    <span className="text-sm">LAUNCH STUDIO DESIGNER</span>
-                  </span>
-                  <span className="text-xs text-neon-cyan font-mono">3D & CAD →</span>
-                </Link>
-
-                {/* Dedicated Account Portal Tile */}
-                <Link
-                  href="/account"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full p-3.5 rounded-2xl bg-zinc-950 border border-zinc-800 text-white font-mono text-xs flex items-center justify-between hover:border-zinc-700 transition-colors"
-                >
-                  <span className="flex items-center gap-2.5 font-bold">
-                    <User className="w-4 h-4 text-emerald-400" />
-                    <span>MY ACCOUNT & ORDERS</span>
-                  </span>
-                  <span className="text-[10px] text-zinc-500 font-mono">Open Portal →</span>
-                </Link>
-
-                {/* GAMES Category */}
-                <div className="space-y-2">
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-neon-cyan font-bold flex items-center gap-1.5">
-                    <Gamepad2 className="w-3.5 h-3.5" />
-                    Games Selection
-                  </div>
-                  <nav className="space-y-1.5">
-                    <Link
-                      href="/#pool"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center justify-between p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 text-sm font-bold text-white hover:border-neon-cyan/60 transition-colors"
-                    >
-                      <span className="flex items-center gap-2.5">
-                        <Trophy className="w-4 h-4 text-neon-cyan" />
-                        Commercial Pool Tables
-                      </span>
-                      <ChevronRight className="w-4 h-4 text-zinc-600" />
-                    </Link>
-
-                    <Link
-                      href="/#arcades"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center justify-between p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 text-sm font-bold text-white hover:border-neon-pink/60 transition-colors"
-                    >
-                      <span className="flex items-center gap-2.5">
-                        <Gamepad2 className="w-4 h-4 text-neon-pink" />
-                        Retro Arcades (3000+ Games)
-                      </span>
-                      <ChevronRight className="w-4 h-4 text-zinc-600" />
-                    </Link>
-                  </nav>
-                </div>
-
-                {/* VIBES Category */}
-                <div className="space-y-2">
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-neon-amber font-bold flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    Vibes & Audio
-                  </div>
-                  <nav className="space-y-1.5">
-                    <Link
-                      href="/#jukeboxes"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center justify-between p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 text-sm font-bold text-white hover:border-neon-amber/60 transition-colors"
-                    >
-                      <span className="flex items-center gap-2.5">
-                        <Disc3 className="w-4 h-4 text-neon-amber" />
-                        Neon Jukebox Sound Centers
-                      </span>
-                      <ChevronRight className="w-4 h-4 text-zinc-600" />
-                    </Link>
-
-                    <Link
-                      href="/#accessories"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center justify-between p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 text-sm font-bold text-white transition-colors"
-                    >
-                      <span className="flex items-center gap-2.5">
-                        <Sparkles className="w-4 h-4 text-neon-lime" />
-                        Lighting & Billiard Gear
-                      </span>
-                      <ChevronRight className="w-4 h-4 text-zinc-600" />
-                    </Link>
-                  </nav>
-                </div>
-
-                {/* REVIEWS & DELIVERIES */}
-                <div className="space-y-2 pt-2 border-t border-zinc-800">
+            <div
+              className="md:hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex flex-col justify-start p-3 sm:p-6 overflow-hidden animate-in fade-in duration-150"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {/* Solid Modal Card */}
+              <div
+                className="relative w-full max-w-lg mx-auto bg-[#0a0d14] border border-zinc-700/90 shadow-[0_0_50px_rgba(0,0,0,0.9),0_0_1px_rgba(255,255,255,0.2)] rounded-3xl overflow-hidden flex flex-col max-h-[calc(100vh-24px)] sm:max-h-[calc(100vh-48px)] animate-in zoom-in-95 duration-200"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Modal Header Bar */}
+                <div className="h-16 px-4 sm:px-5 flex items-center justify-between border-b border-zinc-800/90 bg-[#0e121b] shrink-0">
                   <Link
-                    href="/#reviews"
+                    href="/"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-between p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 text-sm font-bold text-white hover:border-emerald-400/60 transition-colors"
+                    className="flex items-center gap-2.5 group"
+                  >
+                    <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-zinc-900 border border-neon-cyan/40 text-white font-black text-base shadow-subtle-cyan">
+                      <span>M</span>
+                      <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-neon-lime border-2 border-black" />
+                    </div>
+                    <div>
+                      <div className="font-extrabold tracking-wider text-white text-base font-mono leading-none">
+                        M-GAMES
+                      </div>
+                      <div className="text-[10px] text-zinc-500 font-mono mt-0.5">
+                        Cape Town Navigation
+                      </div>
+                    </div>
+                  </Link>
+
+                  <div className="flex items-center gap-2">
+                    <AccountWidget />
+                    <button
+                      type="button"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="p-2 rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white hover:border-zinc-500 transition-colors"
+                      aria-label="Close Navigation Menu"
+                    >
+                      <X className="w-5 h-5 text-white" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Scrollable Modal Content */}
+                <div className="flex-1 overflow-y-auto overscroll-contain px-4 sm:px-5 py-4 pb-10 space-y-4">
+                  {/* Primary Studio Action */}
+                  <Link
+                    href="/designer"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-neon-cyan/20 via-zinc-900 to-zinc-900 border border-neon-cyan/60 text-white font-mono font-bold flex items-center justify-between shadow-lg shadow-neon-cyan/5 active:scale-[0.99] transition-transform"
                   >
                     <span className="flex items-center gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                      Completed Orders & Reviews
+                      <Sparkles className="w-4 h-4 text-neon-cyan" />
+                      <span className="text-sm">LAUNCH STUDIO DESIGNER</span>
                     </span>
-                    <ChevronRight className="w-4 h-4 text-zinc-600" />
+                    <span className="text-xs text-neon-cyan font-mono">3D & CAD →</span>
                   </Link>
-                </div>
 
-                {/* Staff Portals */}
-                <div className="space-y-2 pt-2 border-t border-zinc-800">
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 font-bold">
-                    Staff & Operations Portals
+                  {/* Dedicated Account Portal Tile */}
+                  <Link
+                    href="/account"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full p-3.5 rounded-2xl bg-zinc-950 border border-zinc-800 text-white font-mono text-xs flex items-center justify-between hover:border-zinc-700 transition-colors"
+                  >
+                    <span className="flex items-center gap-2.5 font-bold">
+                      <User className="w-4 h-4 text-emerald-400" />
+                      <span>MY ACCOUNT & ORDERS</span>
+                    </span>
+                    <span className="text-[10px] text-zinc-500 font-mono">Open Portal →</span>
+                  </Link>
+
+                  {/* GAMES Category */}
+                  <div className="space-y-2">
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-neon-cyan font-bold flex items-center gap-1.5">
+                      <Gamepad2 className="w-3.5 h-3.5" />
+                      Games Selection
+                    </div>
+                    <nav className="space-y-1.5">
+                      <Link
+                        href="/#pool"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center justify-between p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 text-sm font-bold text-white hover:border-neon-cyan/60 transition-colors"
+                      >
+                        <span className="flex items-center gap-2.5">
+                          <Trophy className="w-4 h-4 text-neon-cyan" />
+                          Commercial Pool Tables
+                        </span>
+                        <ChevronRight className="w-4 h-4 text-zinc-600" />
+                      </Link>
+
+                      <Link
+                        href="/#arcades"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center justify-between p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 text-sm font-bold text-white hover:border-neon-pink/60 transition-colors"
+                      >
+                        <span className="flex items-center gap-2.5">
+                          <Gamepad2 className="w-4 h-4 text-neon-pink" />
+                          Retro Arcades (3000+ Games)
+                        </span>
+                        <ChevronRight className="w-4 h-4 text-zinc-600" />
+                      </Link>
+                    </nav>
                   </div>
-                  <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-                    <a
-                      href="http://localhost:3001"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-emerald-400 flex items-center justify-center gap-1 font-semibold hover:border-emerald-500/40 transition-colors"
+
+                  {/* VIBES Category */}
+                  <div className="space-y-2">
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-neon-amber font-bold flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      Vibes & Audio
+                    </div>
+                    <nav className="space-y-1.5">
+                      <Link
+                        href="/#jukeboxes"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center justify-between p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 text-sm font-bold text-white hover:border-neon-amber/60 transition-colors"
+                      >
+                        <span className="flex items-center gap-2.5">
+                          <Disc3 className="w-4 h-4 text-neon-amber" />
+                          Neon Jukebox Sound Centers
+                        </span>
+                        <ChevronRight className="w-4 h-4 text-zinc-600" />
+                      </Link>
+
+                      <Link
+                        href="/#accessories"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center justify-between p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 text-sm font-bold text-white transition-colors"
+                      >
+                        <span className="flex items-center gap-2.5">
+                          <Sparkles className="w-4 h-4 text-neon-lime" />
+                          Lighting & Billiard Gear
+                        </span>
+                        <ChevronRight className="w-4 h-4 text-zinc-600" />
+                      </Link>
+                    </nav>
+                  </div>
+
+                  {/* REVIEWS & DELIVERIES */}
+                  <div className="space-y-2 pt-1 border-t border-zinc-800/80">
+                    <Link
+                      href="/#reviews"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center justify-between p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 text-sm font-bold text-white hover:border-emerald-400/60 transition-colors"
                     >
-                      <Shield className="w-3.5 h-3.5" />
-                      <span>Dispatch (:3001)</span>
-                    </a>
-                    <a
-                      href="http://localhost:3002"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-amber-400 flex items-center justify-center gap-1 font-semibold hover:border-amber-500/40 transition-colors"
-                    >
-                      <HardHat className="w-3.5 h-3.5" />
-                      <span>Field Ops (:3002)</span>
-                    </a>
+                      <span className="flex items-center gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                        Completed Orders & Reviews
+                      </span>
+                      <ChevronRight className="w-4 h-4 text-zinc-600" />
+                    </Link>
+                  </div>
+
+                  {/* Staff Portals */}
+                  <div className="space-y-2 pt-1 border-t border-zinc-800/80">
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 font-bold">
+                      Staff & Operations Portals
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                      <a
+                        href="http://localhost:3001"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-emerald-400 flex items-center justify-center gap-1 font-semibold hover:border-emerald-500/40 transition-colors"
+                      >
+                        <Shield className="w-3.5 h-3.5" />
+                        <span>Dispatch (:3001)</span>
+                      </a>
+                      <a
+                        href="http://localhost:3002"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-amber-400 flex items-center justify-center gap-1 font-semibold hover:border-amber-500/40 transition-colors"
+                      >
+                        <HardHat className="w-3.5 h-3.5" />
+                        <span>Field Ops (:3002)</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
