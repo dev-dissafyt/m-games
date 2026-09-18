@@ -1,0 +1,18 @@
+{
+  "name": "m-games-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "clean": "turbo clean"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.0",
+    "turbo": "^2.4.0",
+    "typescript": "^5.7.0"
+  },
+  "packageManager": "pnpm@10.15.1"
+}

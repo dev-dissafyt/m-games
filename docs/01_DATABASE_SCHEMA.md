@@ -1,0 +1,160 @@
+# 01 - Database Schema & Data Models
+
+## Technology Stack
+- **Database Engine:** PostgreSQL 15+ (Hosted on Supabase Cloud, region `eu-west-1` Ireland)
+- **ORM:** Prisma ORM / Drizzle ORM inside `packages/database`
+- **Connection Mode:** Supabase Connection Pooler (`pgbouncer=true` on port 6543) + Direct connection for migrations (`port 5432`)
+- **Compliance:** Section 72 POPIA (Transborder flow of personal information to adequate jurisdiction / GDPR alignment).
+
+---
+
+## Prisma Schema (`packages/database/prisma/schema.prisma`)
+
+```prisma
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum OrderType {
+  PURCHASE_CUSTOM
+  RENTAL_COMMERCIAL
+  RENTAL_RESIDENTIAL
+}
+
+enum RentalTerm {
+  MONTH_TO_MONTH
+  THREE_MONTHS
+  SIX_MONTHS
+  TWELVE_MONTHS
+}
+
+enum OrderStatus {
+  LEAD_NEW
+  CALL_SCHEDULED
+  SPEC_APPROVED
+  DEPOSIT_PENDING
+  IN_MANUFACTURE
+  READY_FOR_DISPATCH
+  DISPATCHED
+  INSTALLED_ACTIVE
+  CANCELLED
+}
+
+enum TableSize {
+  SEVEN_FOOT_PUB       // 2.14m x 1.22m
+  EIGHT_FOOT_PRO      // 2.44m x 1.32m
+  TWELVE_FOOT_SNOOKER // 3.85m x 2.05m
+}
+
+enum FinishType {
+  WOOD_SOLID
+  STEEL_POWDER_COAT
+  VINYL_WRAP
+}
+
+model User {
+  id            String         @id @default(uuid())
+  name          String
+  email         String         @unique
+  phone         String
+  companyName   String?
+  vatNumber     String?
+  venueType     String?        // Pub, Corporate, Arcade, Residential
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  orders        Order[]
+
+  @@index([phone])
+}
+
+model TableConfiguration {
+  id              String         @id @default(uuid())
+  orderId         String         @unique
+  order           Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  tableSize       TableSize      @default(SEVEN_FOOT_PUB)
+  bodyFinishType  FinishType     @default(WOOD_SOLID)
+  bodyColorFinish String         // e.g., "Walnut", "Kiaat", "Matte Black"
+  feltColor       String         // e.g., "Speed Green", "Burgundy", "Electric Blue", "Charcoal"
+  feltTexture     String         @default("standard_wool") // "standard_wool" or "tournament_worsted"
+  customWrapUrl   String?        // High-res logo or vinyl graphics in Supabase Storage
+  coinOpMechanic  Boolean        @default(false)
+  hardwareFinish  String         @default("chrome") // "chrome", "brass", "matte_black"
+  generatedSku    String         // e.g., "MG-8FT-WALNUT-BLU-72"
+  renderSnapshotUrl String?      // 3D snapshot generated at checkout
+}
+
+model SiteAudit {
+  id                  String     @id @default(uuid())
+  orderId             String     @unique
+  order               Order      @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  deliveryAddress     String
+  deliveryCity        String
+  postalCode          String
+  isGroundFloor       Boolean    @default(true)
+  hasElevator         Boolean    @default(false)
+  stairsCount         Int        @default(0)
+  stairType           String?    // "straight", "l_shaped", "spiral"
+  doorwayWidthCm      Float?     // Minimum doorway opening
+  floorPlanJson       Json?      // Vector JSON of room layout & table coordinate placement
+  floorPlanImageUrl   String?    // Exported scaled installation PNG/PDF
+  ingressVideoUrl     String?    // 15-30s walkthrough video stored in Supabase 'ingress-videos'
+  videoReviewNotes    String?    // Owner annotations (e.g. "Low chandelier at 0:08")
+  crewRecommended     Int        @default(2) // 2 for ground, 4 for stairs/tight turns
+  requiresRiggingGear Boolean    @default(false) // Piano straps, stair trolley
+}
+
+model RentalAgreement {
+  id                  String     @id @default(uuid())
+  orderId             String     @unique
+  order               Order      @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  term                RentalTerm @default(SIX_MONTHS)
+  monthlyRateZar      Decimal    @db.Decimal(10, 2)
+  depositZar          Decimal    @db.Decimal(10, 2)
+  coinOpSplitPct      Decimal?   @db.Decimal(5, 2)
+  includedReclothMonths Int      @default(6)
+  nextServiceDueDate  DateTime?
+  contractSignedAt    DateTime?
+  contractPdfUrl      String?
+}
+
+model Order {
+  id                  String              @id @default(uuid())
+  orderNumber         String              @unique // e.g., "MG-2026-0182"
+  userId              String
+  user                User                @relation(fields: [userId], references: [id])
+  type                OrderType           @default(PURCHASE_CUSTOM)
+  status              OrderStatus         @default(LEAD_NEW)
+  quotedTotalZar      Decimal             @db.Decimal(10, 2)
+  depositRequiredZar  Decimal             @db.Decimal(10, 2)
+  depositPaidAt       DateTime?
+  leadTimeWeeks       Int                 @default(4)
+  configuration       TableConfiguration?
+  siteAudit           SiteAudit?
+  rentalAgreement     RentalAgreement?
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+  installationSignoff InstallationSignoff?
+
+  @@index([status])
+}
+
+model InstallationSignoff {
+  id                  String    @id @default(uuid())
+  orderId             String    @unique
+  order               Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  installerName       String
+  slateLeveled        Boolean   @default(false)
+  clothTensioned      Boolean   @default(false)
+  cushionsChecked     Boolean   @default(false)
+  spiritLevelPhotoUrl String?
+  completedRoomPhotoUrl String?
+  customerSignatureUrl String?
+  signedAt            DateTime  @default(now())
+}
+```
