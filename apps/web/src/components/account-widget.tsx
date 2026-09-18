@@ -165,38 +165,34 @@ export function AccountWidget() {
 
   return (
     <div className="relative" ref={menuRef}>
-      {/* Header Button */}
+      {/* Header Button - Directs straight to /account page */}
       {currentUser ? (
-        <button
-          type="button"
-          onClick={() => setMenuOpen(!menuOpen)}
+        <Link
+          href="/account"
           className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-zinc-800/80 bg-zinc-900/90 hover:bg-zinc-800/90 hover:border-neon-cyan/50 transition-all text-xs text-zinc-200 group font-mono"
-          aria-label="Account Menu"
+          aria-label="Account Portal"
         >
           <div className="relative flex items-center justify-center w-6 h-6 rounded-lg bg-zinc-800 border border-neon-cyan/40 text-neon-cyan text-[10px] font-bold group-hover:shadow-[0_0_8px_rgba(0,240,255,0.4)] transition-all">
             {getInitials(currentUser.name)}
             <span className="absolute -bottom-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-emerald-400 border border-black" />
           </div>
           <div className="text-left hidden lg:block">
-            <div className="text-[11px] font-bold text-white leading-tight flex items-center gap-1">
+            <div className="text-[11px] font-bold text-white leading-tight flex items-center gap-1 group-hover:text-neon-cyan transition-colors">
               {currentUser.name}
-              <ChevronDown className={`w-3 h-3 text-zinc-500 transition-transform ${menuOpen ? 'rotate-180' : ''}`} />
             </div>
             <div className="text-[9px] text-zinc-400 truncate max-w-[110px]">
               {currentUser.companyName || currentUser.venueType}
             </div>
           </div>
-          <ChevronDown className="w-3 h-3 text-zinc-500 lg:hidden" />
-        </button>
+        </Link>
       ) : (
-        <button
-          type="button"
-          onClick={() => setShowSwitchModal(true)}
+        <Link
+          href="/account"
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 hover:border-zinc-700 transition-all text-xs font-mono text-zinc-300 hover:text-white"
         >
           <User className="w-3.5 h-3.5 text-zinc-400" />
-          <span>Client Sign In</span>
-        </button>
+          <span>Client Portal</span>
+        </Link>
       )}
 
       {/* Dropdown Menu */}

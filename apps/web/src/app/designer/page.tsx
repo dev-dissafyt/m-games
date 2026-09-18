@@ -134,6 +134,12 @@ function UnifiedDesignerStudioContent() {
     searchParams.get('mode') === 'planner' ? 'planner' : '3d'
   );
 
+  // Mobile Category Tabs for 3D Table Atelier
+  const [mobileCustomCategory, setMobileCustomCategory] = useState<'size' | 'felt' | 'wood' | 'accents'>('felt');
+
+  // Mobile Navigation Tabs for 2D CAD Venue Planner
+  const [mobilePlannerTab, setMobilePlannerTab] = useState<'table' | 'room' | 'clearance'>('table');
+
   // -------------------------------------------------------------
   // 3D Table Configurator State
   // -------------------------------------------------------------
@@ -570,17 +576,17 @@ function UnifiedDesignerStudioContent() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 pb-28 lg:pb-12 space-y-6 sm:space-y-8">
       {/* Studio Header with Segmented Variation Switcher */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-zinc-800/80 gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 sm:pb-6 border-b border-zinc-800/80 gap-3 sm:gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-950/60 border border-amber-800/40 text-[11px] font-mono text-amber-400 uppercase tracking-widest">
-            <Sparkles className="w-3.5 h-3.5" /> M-Games Precision Design Studio
+          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-amber-950/60 border border-amber-800/40 text-[10px] sm:text-[11px] font-mono text-amber-400 uppercase tracking-widest">
+            <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> M-Games Precision Design Studio
           </div>
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-2">
+          <h1 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight mt-1 sm:mt-2">
             {designerMode === '3d'
               ? '3D Table Atelier & Material Configurator'
               : '2D Venue Clearance & Cue Envelope CAD'}
           </h1>
-          <p className="text-xs sm:text-sm text-zinc-400 mt-1">
+          <p className="text-xs sm:text-sm text-zinc-400 mt-1 hidden sm:block">
             {designerMode === '3d'
               ? 'Customize tournament worsted wool, native South African hardwoods, and pocket iron castings in live 3D.'
               : 'Simulate 1.45m tournament cue stroke envelopes, room perimeter walls, and SAT polygon clearances.'}
@@ -588,30 +594,30 @@ function UnifiedDesignerStudioContent() {
         </div>
 
         {/* Segmented Mode Switcher */}
-        <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-zinc-900/90 border border-zinc-800 shadow-xl shrink-0 self-start md:self-auto">
+        <div className="flex items-center gap-1 p-1 sm:p-1.5 rounded-xl sm:rounded-2xl bg-zinc-900/90 border border-zinc-800 shadow-xl shrink-0 self-start md:self-auto">
           <button
             type="button"
             onClick={() => setDesignerMode('3d')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs font-bold transition-all ${
               designerMode === '3d'
                 ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-md'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            <Box className="w-4 h-4" />
-            <span>3D Table Atelier</span>
+            <Box className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <span>3D Atelier</span>
           </button>
 
           <button
             type="button"
             onClick={() => setDesignerMode('planner')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs font-bold transition-all ${
               designerMode === 'planner'
                 ? 'bg-gradient-to-r from-sky-500 to-sky-600 text-black shadow-md'
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            <Compass className="w-4 h-4" />
+            <Compass className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span>2D Venue Planner</span>
           </button>
         </div>
@@ -622,7 +628,7 @@ function UnifiedDesignerStudioContent() {
          ========================================================= */}
       {designerMode === '3d' && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-          {/* Left: 3D Canvas & Tech Specs (7 Cols) */}
+          {/* Left: 3D Canvas & Tech Specs (7 Cols on desktop, full width on mobile) */}
           <div className="lg:col-span-7 space-y-4">
             <Table3DViewer
               tableSize={selectedSize.key}
@@ -632,6 +638,204 @@ function UnifiedDesignerStudioContent() {
               coinOp={coinOp}
               onSnapshotReady={(data) => setSnapshotUrl(data)}
             />
+
+            {/* Mobile Category Navigation & In-place Customizer (lg:hidden) */}
+            <div className="lg:hidden space-y-3 pt-1">
+              {/* Category Segmented Pills */}
+              <div className="grid grid-cols-4 gap-1 p-1 bg-zinc-900/90 border border-zinc-800 rounded-2xl">
+                {[
+                  { id: 'size', label: 'Size' },
+                  { id: 'felt', label: 'Cloth' },
+                  { id: 'wood', label: 'Wood' },
+                  { id: 'accents', label: 'Accents' },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setMobileCustomCategory(tab.id as any)}
+                    className={`py-2 text-xs font-bold rounded-xl transition-all ${
+                      mobileCustomCategory === tab.id
+                        ? 'bg-amber-500 text-black shadow'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Mobile Active Tab Content */}
+              <div className="p-3.5 rounded-2xl bg-[#090b10] border border-zinc-800">
+                {mobileCustomCategory === 'size' && (
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 font-bold">
+                        Table Size & Playfield
+                      </span>
+                      <span className="text-[10px] text-zinc-500">19mm Italian Slate</span>
+                    </div>
+                    <div className="grid grid-cols-1 gap-2">
+                      {SIZES.map((size) => {
+                        const isSelected = selectedSize.key === size.key;
+                        return (
+                          <button
+                            key={size.key}
+                            type="button"
+                            onClick={() => handleSelectSize(size)}
+                            className={`p-3 rounded-xl border text-left transition-all ${
+                              isSelected
+                                ? 'border-amber-500/80 bg-amber-950/30 text-white shadow-sm'
+                                : 'border-zinc-800/80 bg-zinc-950/60 text-zinc-300'
+                            }`}
+                          >
+                            <div className="flex justify-between items-center">
+                              <div>
+                                <div className="font-bold text-xs sm:text-sm flex items-center gap-1.5">
+                                  {size.name}
+                                  {isSelected && <Check className="w-3.5 h-3.5 text-amber-400" />}
+                                </div>
+                                <div className="text-[10px] text-zinc-500 font-mono mt-0.5">
+                                  {size.dims} • Min: {size.room}
+                                </div>
+                              </div>
+                              <div className="text-xs font-mono font-bold text-amber-400">
+                                {formatZar(size.price)}
+                              </div>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {mobileCustomCategory === 'felt' && (
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 font-bold">
+                        Worsted Wool Felt
+                      </span>
+                      <span className="text-[10px] text-zinc-400 font-medium">Strachan 6811</span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {FELT_COLORS.map((felt) => {
+                        const isSelected = selectedFelt.hex === felt.hex;
+                        return (
+                          <button
+                            key={felt.hex}
+                            type="button"
+                            onClick={() => setSelectedFelt(felt)}
+                            className={`flex items-center gap-2.5 p-2 rounded-xl border transition-all text-left ${
+                              isSelected
+                                ? 'border-amber-500/80 bg-amber-950/20 text-white shadow-sm'
+                                : 'border-zinc-800/80 bg-zinc-950/60 text-zinc-300'
+                            }`}
+                          >
+                            <span
+                              className="w-6 h-6 rounded-lg shadow-sm border border-white/20 shrink-0"
+                              style={{ backgroundColor: felt.hex }}
+                            />
+                            <div className="flex-1 min-w-0">
+                              <div className="text-xs font-bold text-white truncate">{felt.name}</div>
+                              <div className="text-[10px] text-zinc-500 truncate">{felt.desc}</div>
+                            </div>
+                            {isSelected && <Check className="w-3.5 h-3.5 text-amber-400 shrink-0" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {mobileCustomCategory === 'wood' && (
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400 font-bold">
+                        Hardwood Finish
+                      </span>
+                      <span className="text-[10px] text-zinc-400 font-medium">Native South African</span>
+                    </div>
+                    <div className="grid grid-cols-1 gap-2">
+                      {WOOD_FINISHES.map((wood) => {
+                        const isSelected = selectedWood.name === wood.name;
+                        return (
+                          <button
+                            key={wood.name}
+                            type="button"
+                            onClick={() => setSelectedWood(wood)}
+                            className={`flex items-center gap-2.5 p-2 rounded-xl border transition-all text-left ${
+                              isSelected
+                                ? 'border-amber-500/80 bg-amber-950/20 text-white shadow-sm'
+                                : 'border-zinc-800/80 bg-zinc-950/60 text-zinc-300'
+                            }`}
+                          >
+                            <span
+                              className="w-6 h-6 rounded-lg shadow-sm border border-white/20 shrink-0"
+                              style={{ backgroundColor: wood.hex }}
+                            />
+                            <div className="flex-1 min-w-0">
+                              <div className="text-xs font-bold text-white truncate">{wood.name}</div>
+                              <div className="text-[10px] text-zinc-500 truncate">{wood.desc}</div>
+                            </div>
+                            <div className="text-[11px] font-mono font-bold text-zinc-400 shrink-0">
+                              {wood.surcharge > 0 ? `+${formatZar(wood.surcharge)}` : 'Included'}
+                            </div>
+                            {isSelected && <Check className="w-3.5 h-3.5 text-amber-400 shrink-0" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {mobileCustomCategory === 'accents' && (
+                  <div className="space-y-3">
+                    <div className="text-[11px] font-mono uppercase tracking-wider text-amber-400 font-bold">
+                      Pocket Hardware & Coin Mechanism
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                      {HARDWARE_FINISHES.map((hw) => {
+                        const isSelected = selectedHardware.name === hw.name;
+                        return (
+                          <button
+                            key={hw.name}
+                            type="button"
+                            onClick={() => setSelectedHardware(hw)}
+                            className={`flex flex-col items-center gap-1.5 p-2 rounded-xl border text-center transition-all ${
+                              isSelected
+                                ? 'border-amber-500 bg-amber-950/20 text-white'
+                                : 'border-zinc-800 bg-zinc-950/60 text-zinc-400'
+                            }`}
+                          >
+                            <span
+                              className="w-4 h-4 rounded-full border border-white/20"
+                              style={{ backgroundColor: hw.hex }}
+                            />
+                            <span className="text-[10px] font-medium leading-tight">{hw.name}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <label className="flex items-center justify-between p-2.5 rounded-xl border border-zinc-800 bg-zinc-950/60 cursor-pointer">
+                      <div>
+                        <div className="text-xs font-bold text-white">Commercial Coin Acceptor</div>
+                        <div className="text-[10px] text-zinc-500">Mechanical dual drop + cash box</div>
+                      </div>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span className="text-xs font-mono text-amber-400 font-bold">+R 3,500</span>
+                        <input
+                          type="checkbox"
+                          checked={coinOp}
+                          onChange={(e) => setCoinOp(e.target.checked)}
+                          className="w-4 h-4 rounded text-amber-500 focus:ring-amber-500 bg-zinc-950 border-zinc-700"
+                        />
+                      </div>
+                    </label>
+                  </div>
+                )}
+              </div>
+            </div>
 
             {/* Quick Specs Strip */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -674,8 +878,8 @@ function UnifiedDesignerStudioContent() {
             </div>
           </div>
 
-          {/* Right: Customization Selectors (5 Cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          {/* Right: Customization Selectors (5 Cols on desktop, hidden on mobile) */}
+          <div className="hidden lg:block lg:col-span-5 space-y-6">
             {/* 1. Size */}
             <div className="space-y-2">
               <div className="flex justify-between items-center">
@@ -955,9 +1159,9 @@ function UnifiedDesignerStudioContent() {
                 </div>
               </div>
 
-              {/* Rotation & Quick Action Toolbar */}
+              {/* Desktop Rotation & Quick Action Toolbar (hidden on mobile, integrated into mobile tabs) */}
               {selectedTable && (
-                <div className="p-4 rounded-2xl bg-[#090b10] border border-zinc-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div className="hidden lg:flex p-4 rounded-2xl bg-[#090b10] border border-zinc-800 items-center justify-between gap-3 text-xs">
                   <div className="flex items-center gap-2">
                     <span className="text-zinc-500">Selected Table:</span>
                     <span className="font-bold text-white">
@@ -1002,10 +1206,242 @@ function UnifiedDesignerStudioContent() {
                   </div>
                 </div>
               )}
+
+              {/* Mobile 2D CAD Segmented Tabs & Drawer (lg:hidden) */}
+              <div className="lg:hidden space-y-3 pt-1">
+                <div className="grid grid-cols-3 gap-1 p-1 bg-zinc-900/90 border border-zinc-800 rounded-2xl">
+                  <button
+                    type="button"
+                    onClick={() => setMobilePlannerTab('table')}
+                    className={`py-2 text-xs font-bold rounded-xl transition-all ${
+                      mobilePlannerTab === 'table'
+                        ? 'bg-sky-500 text-black shadow'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    Table & Rotate
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMobilePlannerTab('room')}
+                    className={`py-2 text-xs font-bold rounded-xl transition-all ${
+                      mobilePlannerTab === 'room'
+                        ? 'bg-sky-500 text-black shadow'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    Room Size
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMobilePlannerTab('clearance')}
+                    className={`py-2 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 ${
+                      mobilePlannerTab === 'clearance'
+                        ? 'bg-sky-500 text-black shadow'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    <span>Clearance</span>
+                    {selectedResult && (
+                      <span
+                        className={`w-2 h-2 rounded-full ${
+                          selectedResult.status === 'GREEN'
+                            ? 'bg-emerald-400'
+                            : selectedResult.status === 'AMBER'
+                            ? 'bg-amber-400'
+                            : 'bg-rose-400'
+                        }`}
+                      />
+                    )}
+                  </button>
+                </div>
+
+                {/* Mobile Tab 1: Table & Rotate */}
+                {mobilePlannerTab === 'table' && (
+                  <div className="p-3.5 rounded-2xl bg-[#090b10] border border-zinc-800 space-y-3">
+                    {selectedTable ? (
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <span className="text-[10px] text-zinc-500 uppercase font-mono block">Selected Table</span>
+                            <span className="font-bold text-xs text-white">
+                              {TABLE_SPECS[selectedTable.sizeKey].label}
+                            </span>
+                          </div>
+                          <span className="font-mono text-amber-400 text-xs">
+                            ({selectedTable.center.x}m, {selectedTable.center.y}m)
+                          </span>
+                        </div>
+
+                        {/* Rotation & Delete Controls */}
+                        <div className="flex items-center gap-1.5 pt-1">
+                          <button
+                            type="button"
+                            onClick={() => rotateSelectedTable(-15)}
+                            className="flex-1 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold flex items-center justify-center gap-1"
+                          >
+                            <RotateCw className="w-3.5 h-3.5 -scale-x-100" />
+                            -15°
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => rotateSelectedTable(15)}
+                            className="flex-1 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold flex items-center justify-center gap-1"
+                          >
+                            <RotateCw className="w-3.5 h-3.5" />
+                            +15°
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => rotateSelectedTable(90)}
+                            className="flex-1 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-mono text-xs font-bold"
+                          >
+                            +90°
+                          </button>
+                          <button
+                            type="button"
+                            onClick={removeSelectedTable}
+                            className="p-2 rounded-xl bg-rose-950/50 hover:bg-rose-900/70 text-rose-300 border border-rose-800/40"
+                            title="Remove Table"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-xs text-zinc-400 py-2 text-center">
+                        Tap a table on the canvas to rotate or adjust
+                      </div>
+                    )}
+
+                    {/* Add Table Buttons */}
+                    <div className="pt-2 border-t border-zinc-800/80 space-y-1.5">
+                      <span className="text-[10px] font-mono uppercase text-sky-400 font-bold block">
+                        Add Tables to Layout
+                      </span>
+                      <div className="grid grid-cols-2 gap-2">
+                        <button
+                          type="button"
+                          onClick={() => addTable('SEVEN_FOOT_PUB')}
+                          className="p-2.5 rounded-xl border border-zinc-800 bg-zinc-950 hover:border-sky-500/60 text-left"
+                        >
+                          <div className="text-xs font-bold text-white">+ 7ft Pub</div>
+                          <div className="text-[9px] text-zinc-500 font-mono">2.14m × 1.22m</div>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => addTable('EIGHT_FOOT_PRO')}
+                          className="p-2.5 rounded-xl border border-zinc-800 bg-zinc-950 hover:border-sky-500/60 text-left"
+                        >
+                          <div className="text-xs font-bold text-white">+ 8ft Pro</div>
+                          <div className="text-[9px] text-zinc-500 font-mono">2.44m × 1.32m</div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Mobile Tab 2: Room Size */}
+                {mobilePlannerTab === 'room' && (
+                  <div className="p-3.5 rounded-2xl bg-[#090b10] border border-zinc-800 space-y-3">
+                    <span className="text-[10px] font-mono uppercase text-sky-400 font-bold block">
+                      Room Outer Dimensions (Meters)
+                    </span>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="text-[10px] text-zinc-400 block mb-1">Length (X): {roomLength}m</label>
+                        <input
+                          type="number"
+                          step="0.1"
+                          min="3.5"
+                          max="16.0"
+                          value={roomLength}
+                          onChange={(e) => setRoomLength(parseFloat(e.target.value) || 5.0)}
+                          className="w-full bg-zinc-950 border border-zinc-700 rounded-xl px-2.5 py-1.5 text-xs text-white font-mono"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] text-zinc-400 block mb-1">Width (Y): {roomWidth}m</label>
+                        <input
+                          type="number"
+                          step="0.1"
+                          min="3.0"
+                          max="14.0"
+                          value={roomWidth}
+                          onChange={(e) => setRoomWidth(parseFloat(e.target.value) || 4.0)}
+                          className="w-full bg-zinc-950 border border-zinc-700 rounded-xl px-2.5 py-1.5 text-xs text-white font-mono"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Mobile Tab 3: Clearance Diagnostics */}
+                {mobilePlannerTab === 'clearance' && selectedResult && (
+                  <div
+                    className={`p-3.5 rounded-2xl border transition-all space-y-2.5 shadow-xl ${
+                      selectedResult.status === 'GREEN'
+                        ? 'bg-emerald-950/25 border-emerald-500/50 text-emerald-100'
+                        : selectedResult.status === 'AMBER'
+                        ? 'bg-amber-950/25 border-amber-500/50 text-amber-100'
+                        : 'bg-rose-950/25 border-rose-500/50 text-rose-100'
+                    }`}
+                  >
+                    <div className="flex items-start gap-2.5">
+                      {selectedResult.status === 'GREEN' && (
+                        <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                      )}
+                      {selectedResult.status === 'AMBER' && (
+                        <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                      )}
+                      {selectedResult.status === 'RED' && (
+                        <XCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+                      )}
+                      <div>
+                        <div className="text-xs font-bold uppercase tracking-wider font-mono">
+                          {selectedResult.status === 'GREEN'
+                            ? 'Optimal Clearance'
+                            : selectedResult.status === 'AMBER'
+                            ? 'Restricted Cue Stroke'
+                            : 'Physical Obstruction'}
+                        </div>
+                        <p className="text-[11px] mt-0.5 text-zinc-300 leading-snug font-normal">
+                          {selectedResult.summaryMessage}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="pt-2 border-t border-white/10 grid grid-cols-2 gap-x-2 gap-y-1 text-[11px] font-mono">
+                      {selectedResult.sideClearances.map((s) => (
+                        <div key={s.side} className="flex justify-between items-center">
+                          <span className="capitalize text-zinc-400">{s.side}:</span>
+                          <span
+                            className={`font-semibold ${
+                              s.isRestricted ? 'text-amber-400' : 'text-emerald-400'
+                            }`}
+                          >
+                            {s.clearanceMeters}m
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Mobile CTA */}
+                <button
+                  type="button"
+                  onClick={handleProceed}
+                  className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-400 text-black font-extrabold text-xs shadow-lg shadow-sky-950 transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                >
+                  Confirm Floor Plan & Proceed to Ingress
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
-            {/* Right: Room Dimension Sliders, Table Addition & SAT Diagnostic (4 Cols) */}
-            <div className="lg:col-span-4 space-y-6">
+            {/* Right: Room Dimension Sliders, Table Addition & SAT Diagnostic (4 Cols on desktop, hidden on mobile) */}
+            <div className="hidden lg:block lg:col-span-4 space-y-6">
               {/* Outer Walls */}
               <div className="p-5 sm:p-6 rounded-3xl bg-[#090b10] border border-zinc-800 space-y-4">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-sky-400 font-mono">
@@ -1164,6 +1600,44 @@ function UnifiedDesignerStudioContent() {
             className="py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 text-black font-extrabold text-xs shadow-lg shadow-amber-950/60 flex items-center gap-1.5 active:scale-95 shrink-0"
           >
             <span>Lock Spec</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+
+      {/* Sticky Mobile Summary Action Bar (Only in 2D Mode on small screens) */}
+      {designerMode === 'planner' && (
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#06080d]/95 backdrop-blur-xl border-t border-zinc-800/90 p-3 sm:p-4 flex items-center justify-between gap-3 shadow-2xl">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-1.5">
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  selectedResult?.status === 'GREEN'
+                    ? 'bg-emerald-400'
+                    : selectedResult?.status === 'AMBER'
+                    ? 'bg-amber-400'
+                    : 'bg-rose-400'
+                }`}
+              />
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-200">
+                {selectedResult?.status === 'GREEN'
+                  ? 'Optimal Clearances'
+                  : selectedResult?.status === 'AMBER'
+                  ? 'Restricted Stroke'
+                  : 'Wall Clash'}
+              </span>
+            </div>
+            <div className="text-[10px] text-zinc-400 font-mono truncate mt-0.5">
+              {tables.length} Table{tables.length > 1 ? 's' : ''} • {roomLength}m × {roomWidth}m
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleProceed}
+            className="py-3 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-400 text-black font-extrabold text-xs shadow-lg shadow-sky-950/60 flex items-center gap-1.5 active:scale-95 shrink-0"
+          >
+            <span>Confirm Plan</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>

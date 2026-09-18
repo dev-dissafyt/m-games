@@ -586,18 +586,18 @@ export function Table3DViewer({
   };
 
   return (
-    <div className="relative w-full h-[360px] sm:h-[480px] lg:h-[620px] rounded-3xl overflow-hidden bg-[#07080d] border border-zinc-800 shadow-2xl group">
+    <div className="relative w-full h-[260px] sm:h-[400px] lg:h-[580px] rounded-3xl overflow-hidden bg-[#07080d] border border-zinc-800 shadow-2xl group">
       {/* 3D Canvas Mount */}
       <div ref={mountRef} className="w-full h-full cursor-grab active:cursor-grabbing touch-none" />
 
       {/* Top Floating Controls: Camera Perspectives & Lighting */}
-      <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
+      <div className="absolute top-2.5 sm:top-3 left-2.5 sm:left-3 right-2.5 sm:right-3 flex items-center justify-between gap-1.5 sm:gap-2 pointer-events-none">
         {/* Camera Views Scrollable Strip */}
-        <div className="pointer-events-auto flex items-center gap-1 bg-[#090b10]/90 backdrop-blur-xl border border-zinc-700/60 p-1 rounded-2xl shadow-xl overflow-x-auto scrollbar-none max-w-[calc(100%-112px)] sm:max-w-none">
+        <div className="pointer-events-auto flex items-center gap-0.5 sm:gap-1 bg-[#090b10]/90 backdrop-blur-xl border border-zinc-700/60 p-0.5 sm:p-1 rounded-xl sm:rounded-2xl shadow-xl overflow-x-auto scrollbar-none">
           <button
             type="button"
             onClick={() => setActiveView('orbit')}
-            className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold transition-all shrink-0 ${
+            className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-semibold transition-all shrink-0 ${
               activeView === 'orbit'
                 ? 'bg-amber-500 text-black shadow-md font-bold'
                 : 'text-zinc-300 hover:text-white'
@@ -608,7 +608,7 @@ export function Table3DViewer({
           <button
             type="button"
             onClick={() => setActiveView('aim')}
-            className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold transition-all shrink-0 ${
+            className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-semibold transition-all shrink-0 ${
               activeView === 'aim'
                 ? 'bg-amber-500 text-black shadow-md font-bold'
                 : 'text-zinc-300 hover:text-white'
@@ -619,7 +619,7 @@ export function Table3DViewer({
           <button
             type="button"
             onClick={() => setActiveView('top')}
-            className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold transition-all shrink-0 ${
+            className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-semibold transition-all shrink-0 ${
               activeView === 'top'
                 ? 'bg-amber-500 text-black shadow-md font-bold'
                 : 'text-zinc-300 hover:text-white'
@@ -630,7 +630,7 @@ export function Table3DViewer({
           <button
             type="button"
             onClick={() => setActiveView('corner')}
-            className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold transition-all shrink-0 ${
+            className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-semibold transition-all shrink-0 ${
               activeView === 'corner'
                 ? 'bg-amber-500 text-black shadow-md font-bold'
                 : 'text-zinc-300 hover:text-white'
@@ -641,7 +641,7 @@ export function Table3DViewer({
         </div>
 
         {/* Studio Lighting Mood Toggle */}
-        <div className="pointer-events-auto flex items-center gap-1 bg-[#090b10]/90 backdrop-blur-xl border border-zinc-700/60 p-1 rounded-2xl shadow-xl shrink-0">
+        <div className="pointer-events-auto flex items-center gap-0.5 sm:gap-1 bg-[#090b10]/90 backdrop-blur-xl border border-zinc-700/60 p-0.5 sm:p-1 rounded-xl sm:rounded-2xl shadow-xl shrink-0">
           <button
             type="button"
             onClick={() => setLightingMode('studio')}
