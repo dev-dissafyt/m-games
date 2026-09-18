@@ -3,7 +3,18 @@
 import React, { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { formatZar } from '@m-games/ui';
-import { ShieldCheck, Lock, CreditCard, Building, User, Phone, Mail, CheckCircle2 } from 'lucide-react';
+import {
+  ShieldCheck,
+  Lock,
+  CreditCard,
+  Building,
+  User,
+  Phone,
+  Mail,
+  CheckCircle2,
+  Sparkles,
+  ArrowRight,
+} from 'lucide-react';
 
 function CheckoutContent() {
   const router = useRouter();
@@ -66,9 +77,11 @@ function CheckoutContent() {
 
       const data = await res.json();
       if (data.success && data.order) {
-        router.push(`/checkout/success?orderNumber=${data.order.orderNumber}&name=${encodeURIComponent(customerName)}`);
+        router.push(
+          `/checkout/success?orderNumber=${data.order.orderNumber}&name=${encodeURIComponent(customerName)}`
+        );
       } else {
-        alert('Order processing error. Please check your connection.');
+        alert('Order processing error. Please verify your connection.');
       }
     } catch (err) {
       console.error(err);
@@ -79,184 +92,191 @@ function CheckoutContent() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-8">
+      {/* Header */}
       <div className="pb-6 border-b border-zinc-800">
-        <div className="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-400 uppercase tracking-widest">
-          <Lock className="w-3.5 h-3.5" /> Stage 3 of 3: Secure Checkout
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-950/60 border border-amber-800/40 text-[11px] font-mono text-amber-400 uppercase tracking-widest">
+          <Lock className="w-3.5 h-3.5" /> Stage 3 of 3: Secure Production Lock
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-1">
-          Finalize Order & Manufacturing Deposit
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-2">
+          Reserve Build Slot & 50% Manufacturing Deposit
         </h1>
-        <p className="text-sm text-zinc-400 mt-1">
-          Simulated 50% deposit checkout. Your build slot is immediately locked into production.
+        <p className="text-sm text-zinc-400 mt-1 max-w-2xl leading-relaxed">
+          Your commission is immediately entered into our workshop schedule. Balance only due on site after 3-axis machinist spirit leveling sign-off.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Customer Form (7 Cols) */}
         <div className="lg:col-span-7 space-y-6">
           {/* Order Type Selector */}
-          <div className="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800 space-y-2">
-            <label className="text-xs font-bold uppercase tracking-wider text-zinc-400 block">
-              Purchase or Commercial Lease?
+          <div className="p-6 rounded-3xl bg-[#090b10] border border-zinc-800 space-y-3 shadow-xl">
+            <label className="text-xs font-bold uppercase tracking-wider text-amber-400 font-mono block">
+              Contract Option: Commission Purchase or Commercial Lease?
             </label>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
                 onClick={() => setOrderType('PURCHASE_CUSTOM')}
-                className={`py-2.5 px-3 rounded-lg border text-xs font-semibold text-center transition-all ${
+                className={`py-3 px-4 rounded-2xl border text-xs font-bold text-center transition-all ${
                   orderType === 'PURCHASE_CUSTOM'
-                    ? 'border-emerald-500 bg-emerald-950/40 text-white'
+                    ? 'border-amber-500 bg-amber-950/30 text-white shadow-md'
                     : 'border-zinc-800 bg-zinc-950 text-zinc-400'
                 }`}
               >
-                Custom Table Purchase (50% Deposit)
+                Custom Table Commission
+                <span className="block text-[10px] font-normal text-zinc-400 mt-0.5">
+                  50% deposit • Ownership
+                </span>
               </button>
               <button
                 type="button"
                 onClick={() => setOrderType('RENTAL_COMMERCIAL')}
-                className={`py-2.5 px-3 rounded-lg border text-xs font-semibold text-center transition-all ${
+                className={`py-3 px-4 rounded-2xl border text-xs font-bold text-center transition-all ${
                   orderType === 'RENTAL_COMMERCIAL'
-                    ? 'border-emerald-500 bg-emerald-950/40 text-white'
+                    ? 'border-amber-500 bg-amber-950/30 text-white shadow-md'
                     : 'border-zinc-800 bg-zinc-950 text-zinc-400'
                 }`}
               >
-                Commercial Venue Lease (Reservation)
+                Commercial Venue Lease
+                <span className="block text-[10px] font-normal text-zinc-400 mt-0.5">
+                  Fixed monthly • Service included
+                </span>
               </button>
             </div>
           </div>
 
           {/* Contact Details */}
-          <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-300">
-              Customer & Venue Details
+          <div className="p-8 rounded-3xl bg-[#090b10] border border-zinc-800 space-y-5 shadow-xl">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-amber-400 font-mono">
+              Client & Delivery Venue Information
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs text-zinc-400 block mb-1">Full Name / Contact *</label>
+                <label className="text-xs text-zinc-300 block mb-1">Full Name / Primary Contact *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Dave Stewart"
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
-                  className="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white"
+                  className="w-full bg-zinc-950 border border-zinc-700 rounded-xl px-3.5 py-2.5 text-sm text-white"
                 />
               </div>
 
               <div>
-                <label className="text-xs text-zinc-400 block mb-1">Mobile Phone (SA) *</label>
+                <label className="text-xs text-zinc-300 block mb-1">Mobile Telephone (South Africa) *</label>
                 <input
                   type="tel"
                   required
                   placeholder="+27821234567"
                   value={customerPhone}
                   onChange={(e) => setCustomerPhone(e.target.value)}
-                  className="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white font-mono"
+                  className="w-full bg-zinc-950 border border-zinc-700 rounded-xl px-3.5 py-2.5 text-sm text-white font-mono"
                 />
               </div>
 
               <div>
-                <label className="text-xs text-zinc-400 block mb-1">Email Address *</label>
+                <label className="text-xs text-zinc-300 block mb-1">Email Address *</label>
                 <input
                   type="email"
                   required
                   placeholder="dave@thebrassbell.co.za"
                   value={customerEmail}
                   onChange={(e) => setCustomerEmail(e.target.value)}
-                  className="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white"
+                  className="w-full bg-zinc-950 border border-zinc-700 rounded-xl px-3.5 py-2.5 text-sm text-white"
                 />
               </div>
 
               <div>
-                <label className="text-xs text-zinc-400 block mb-1">Company / Venue Name (Optional)</label>
+                <label className="text-xs text-zinc-300 block mb-1">Venue / Company Name (Optional)</label>
                 <input
                   type="text"
                   placeholder="The Brass Bell Pub"
                   value={companyName}
                   onChange={(e) => setCompanyName(e.target.value)}
-                  className="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white"
+                  className="w-full bg-zinc-950 border border-zinc-700 rounded-xl px-3.5 py-2.5 text-sm text-white"
                 />
               </div>
             </div>
           </div>
 
-          {/* Payment Method Selector */}
-          <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-300">
-              Payment Gateway Simulation
+          {/* Payment Simulation */}
+          <div className="p-8 rounded-3xl bg-[#090b10] border border-zinc-800 space-y-4 shadow-xl">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-amber-400 font-mono">
+              Secure Deposit Gateway
             </h3>
 
             <div className="grid grid-cols-3 gap-3">
               <button
                 type="button"
                 onClick={() => setPaymentMethod('ozow')}
-                className={`p-3 rounded-xl border text-center transition-all ${
+                className={`p-3.5 rounded-2xl border text-center transition-all ${
                   paymentMethod === 'ozow'
-                    ? 'border-emerald-500 bg-emerald-950/30 text-white'
+                    ? 'border-amber-500 bg-amber-950/30 text-white shadow-sm'
                     : 'border-zinc-800 bg-zinc-950 text-zinc-400'
                 }`}
               >
                 <div className="text-xs font-bold">Ozow Instant EFT</div>
-                <div className="text-[10px] text-zinc-500 mt-0.5">Zero fees</div>
+                <div className="text-[10px] text-zinc-500 mt-0.5">Direct SA Bank</div>
               </button>
 
               <button
                 type="button"
                 onClick={() => setPaymentMethod('card')}
-                className={`p-3 rounded-xl border text-center transition-all ${
+                className={`p-3.5 rounded-2xl border text-center transition-all ${
                   paymentMethod === 'card'
-                    ? 'border-emerald-500 bg-emerald-950/30 text-white'
+                    ? 'border-amber-500 bg-amber-950/30 text-white shadow-sm'
                     : 'border-zinc-800 bg-zinc-950 text-zinc-400'
                 }`}
               >
-                <div className="text-xs font-bold">Visa / Master</div>
-                <div className="text-[10px] text-zinc-500 mt-0.5">Debit or Credit</div>
+                <div className="text-xs font-bold">Credit / Debit Card</div>
+                <div className="text-[10px] text-zinc-500 mt-0.5">3D Secure Verified</div>
               </button>
 
               <button
                 type="button"
                 onClick={() => setPaymentMethod('eft')}
-                className={`p-3 rounded-xl border text-center transition-all ${
+                className={`p-3.5 rounded-2xl border text-center transition-all ${
                   paymentMethod === 'eft'
-                    ? 'border-emerald-500 bg-emerald-950/30 text-white'
+                    ? 'border-amber-500 bg-amber-950/30 text-white shadow-sm'
                     : 'border-zinc-800 bg-zinc-950 text-zinc-400'
                 }`}
               >
-                <div className="text-xs font-bold">Manual EFT</div>
-                <div className="text-[10px] text-zinc-500 mt-0.5">Pro-forma invoice</div>
+                <div className="text-xs font-bold">Bank Pro-Forma</div>
+                <div className="text-[10px] text-zinc-500 mt-0.5">Invoice via Email</div>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Order Summary (5 Cols) */}
+        {/* Right Column: Spec Breakdown & Lock CTA (5 Cols) */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="p-6 rounded-2xl bg-zinc-900/80 border border-zinc-800 space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-300 pb-3 border-b border-zinc-800">
-              Order Specification
+          <div className="p-8 rounded-3xl bg-[#090b10] border border-amber-500/40 space-y-5 shadow-2xl">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-amber-400 font-mono pb-3 border-b border-zinc-800">
+              Commission Build Specification
             </h3>
 
-            <div className="space-y-2 text-xs">
+            <div className="space-y-2.5 text-xs">
               <div className="flex justify-between">
                 <span className="text-zinc-400">Model:</span>
-                <span className="font-semibold text-white">{sizeName}</span>
+                <span className="font-bold text-white">{sizeName}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-400">Finish:</span>
+                <span className="text-zinc-400">Hardwood Finish:</span>
                 <span className="font-semibold text-white">{wood}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-400">Tournament Felt:</span>
+                <span className="text-zinc-400">Worsted Cloth:</span>
                 <span className="font-semibold text-white">{felt}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-400">SKU:</span>
-                <span className="font-mono text-emerald-400">{sku}</span>
+                <span className="text-zinc-400">SPEC SKU:</span>
+                <span className="font-mono text-amber-400 font-bold">{sku}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-400">Delivery Address:</span>
+                <span className="text-zinc-400">Destination:</span>
                 <span className="text-right text-zinc-300 truncate max-w-[180px]">
                   {deliveryAddress}, {deliveryCity}
                 </span>
@@ -265,36 +285,41 @@ function CheckoutContent() {
 
             <div className="pt-4 border-t border-zinc-800 space-y-2">
               <div className="flex justify-between text-xs text-zinc-400">
-                <span>Quoted Total:</span>
-                <span className="font-mono">{formatZar(totalPrice)}</span>
+                <span>Full Quoted Value:</span>
+                <span className="font-mono text-zinc-300">{formatZar(totalPrice)}</span>
               </div>
               <div className="flex justify-between items-baseline text-white">
                 <span className="font-bold text-sm">
                   {orderType === 'PURCHASE_CUSTOM' ? 'Deposit Due Now (50%):' : 'Lease Reservation Deposit:'}
                 </span>
-                <span className="text-2xl font-black text-emerald-400 font-mono">
+                <span className="text-3xl font-black text-amber-400 font-mono">
                   {formatZar(depositPrice)}
                 </span>
               </div>
-              <p className="text-[11px] text-zinc-500 leading-normal">
-                Remaining 50% balance payable on site after digital spirit-level sign-off.
+              <p className="text-[11px] text-zinc-500 leading-relaxed">
+                Balance payable upon installation, leveling, and digital spirit-level warranty sign-off.
               </p>
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-4 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-xl shadow-emerald-950 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-4 px-4 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-extrabold text-sm shadow-xl shadow-amber-950 transition-all flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95"
             >
               {isSubmitting ? (
-                'Processing Order...'
+                'Securing Workshop Slot...'
               ) : (
                 <>
                   <ShieldCheck className="w-4 h-4" />
-                  Pay {formatZar(depositPrice)} & Place Order
+                  Pay {formatZar(depositPrice)} & Lock Production Slot
                 </>
               )}
             </button>
+
+            <div className="flex items-center justify-center gap-2 text-[11px] text-zinc-500">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Includes 10-Year Slate Warranty & 6-Month Service</span>
+            </div>
           </div>
         </div>
       </form>
@@ -304,9 +329,14 @@ function CheckoutContent() {
 
 export default function CheckoutPage() {
   return (
-    <Suspense fallback={<div className="max-w-4xl mx-auto p-12 text-center text-zinc-400">Loading checkout...</div>}>
+    <Suspense
+      fallback={
+        <div className="max-w-4xl mx-auto p-16 text-center text-zinc-400 font-mono text-xs">
+          Loading secure checkout...
+        </div>
+      }
+    >
       <CheckoutContent />
     </Suspense>
   );
 }
-
