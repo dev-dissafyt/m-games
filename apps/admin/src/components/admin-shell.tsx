@@ -62,6 +62,18 @@ export function AdminShell({ children }: AdminShellProps) {
     setIsMobileOpen(false);
   }, [pathname]);
 
+  // Lock body scroll when mobile drawer is open
+  useEffect(() => {
+    if (isMobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileOpen]);
+
   const navItems = [
     {
       href: '/leads',
@@ -272,7 +284,7 @@ export function AdminShell({ children }: AdminShellProps) {
           onClick={() => setIsMobileOpen(false)}
         >
           <div
-            className="w-72 max-w-[85vw] h-full bg-[#07090e] border-r border-zinc-800 p-5 flex flex-col justify-between shadow-2xl"
+            className="w-80 max-w-[88vw] h-full bg-[#07090e] border-r border-zinc-800 p-5 flex flex-col justify-between shadow-2xl overflow-y-auto overscroll-contain pb-12"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="space-y-6">

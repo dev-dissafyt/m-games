@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import './globals.css';
 import {
@@ -33,6 +33,18 @@ export default function RootLayout({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<'games' | 'vibes' | null>(null);
 
+  // Prevent background scrolling when mobile menu overlay is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <html lang="en" className="dark scroll-smooth">
       <head>
@@ -64,14 +76,14 @@ export default function RootLayout({
 
         {/* Header */}
         <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-[#030305]/95 backdrop-blur-xl">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
             {/* Logo: Only square with M and M-GAMES in text, no subtext */}
-            <Link href="/" className="flex items-center gap-3 group shrink-0">
-              <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-zinc-900 border border-neon-cyan/40 text-white font-black text-xl shadow-subtle-cyan group-hover:border-neon-cyan group-hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all">
+            <Link href="/" className="flex items-center gap-2 sm:gap-3 group shrink-0">
+              <div className="relative flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-zinc-900 border border-neon-cyan/40 text-white font-black text-lg sm:text-xl shadow-subtle-cyan group-hover:border-neon-cyan group-hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all">
                 <span>M</span>
                 <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 rounded-full bg-neon-lime border-2 border-black" />
               </div>
-              <span className="font-extrabold tracking-wider text-white text-lg font-mono">
+              <span className="font-extrabold tracking-wider text-white text-base sm:text-lg font-mono">
                 M-GAMES
               </span>
             </Link>
@@ -203,14 +215,14 @@ export default function RootLayout({
             </nav>
 
             {/* Right CTAs: Account Management + Unified Studio Designer Button */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               {/* Account Management (Signed in status & client navigation) */}
               <AccountWidget />
 
-              {/* Unified Studio Designer Action Button */}
+              {/* Unified Studio Designer Action Button - Hidden on small mobile to prevent header button cutoff */}
               <Link
                 href="/designer"
-                className="inline-flex items-center justify-center gap-2 text-xs font-bold px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-white text-black hover:bg-zinc-100 btn-hover-glow-white active:scale-95 font-mono tracking-wider transition-all"
+                className="hidden sm:inline-flex items-center justify-center gap-2 text-xs font-bold px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-white text-black hover:bg-zinc-100 btn-hover-glow-white active:scale-95 font-mono tracking-wider transition-all shrink-0"
               >
                 <Sparkles className="w-3.5 h-3.5 text-black" />
                 <span>STUDIO DESIGNER</span>
@@ -220,30 +232,57 @@ export default function RootLayout({
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white transition-colors"
+                className="md:hidden p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white transition-colors shrink-0"
                 aria-label="Toggle Navigation Menu"
               >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {mobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
           </div>
 
-          {/* Mobile Sliding Drawer Navigation */}
+          {/* Mobile Sliding Drawer Navigation - Full-Screen Overlay with Dedicated Header */}
           {mobileMenuOpen && (
-            <div
-              className="md:hidden fixed inset-0 top-[90px] z-50 bg-black/95 backdrop-blur-2xl border-t border-zinc-800 p-6 flex flex-col justify-between overflow-y-auto"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <div className="space-y-6" onClick={(e) => e.stopPropagation()}>
+            <div className="md:hidden fixed inset-0 z-50 bg-[#030305] flex flex-col">
+              {/* Drawer Header Bar */}
+              <div className="h-16 px-4 sm:px-6 flex items-center justify-between border-b border-zinc-800/80 bg-[#030305] shrink-0">
+                <Link
+                  href="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2.5 group"
+                >
+                  <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-zinc-900 border border-neon-cyan/40 text-white font-black text-lg shadow-subtle-cyan">
+                    <span>M</span>
+                    <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-neon-lime border-2 border-black" />
+                  </div>
+                  <span className="font-extrabold tracking-wider text-white text-base font-mono">
+                    M-GAMES
+                  </span>
+                </Link>
+
+                <div className="flex items-center gap-2">
+                  <AccountWidget />
+                  <button
+                    type="button"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white transition-colors"
+                    aria-label="Close Navigation Menu"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Scrollable Navigation Body */}
+              <div className="flex-1 overflow-y-auto overscroll-contain px-4 sm:px-6 py-5 pb-36 space-y-5">
                 {/* Primary Studio Action */}
                 <Link
                   href="/designer"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full p-4 rounded-2xl bg-gradient-to-r from-neon-cyan/20 via-zinc-900 to-zinc-900 border border-neon-cyan/50 text-white font-mono font-bold flex items-center justify-between"
+                  className="w-full p-4 rounded-2xl bg-gradient-to-r from-neon-cyan/20 via-zinc-900 to-zinc-900 border border-neon-cyan/50 text-white font-mono font-bold flex items-center justify-between shadow-lg shadow-neon-cyan/5 active:scale-[0.99] transition-transform"
                 >
                   <span className="flex items-center gap-2.5">
                     <Sparkles className="w-4 h-4 text-neon-cyan" />
-                    <span>LAUNCH STUDIO DESIGNER</span>
+                    <span className="text-sm">LAUNCH STUDIO DESIGNER</span>
                   </span>
                   <span className="text-xs text-neon-cyan font-mono">3D & CAD →</span>
                 </Link>
@@ -352,7 +391,7 @@ export default function RootLayout({
                       href="http://localhost:3001"
                       target="_blank"
                       rel="noreferrer"
-                      className="p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-emerald-400 flex items-center justify-center gap-1 font-semibold"
+                      className="p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-emerald-400 flex items-center justify-center gap-1 font-semibold hover:border-emerald-500/40 transition-colors"
                     >
                       <Shield className="w-3.5 h-3.5" />
                       <span>Dispatch (:3001)</span>
@@ -361,7 +400,7 @@ export default function RootLayout({
                       href="http://localhost:3002"
                       target="_blank"
                       rel="noreferrer"
-                      className="p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-amber-400 flex items-center justify-center gap-1 font-semibold"
+                      className="p-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-amber-400 flex items-center justify-center gap-1 font-semibold hover:border-amber-500/40 transition-colors"
                     >
                       <HardHat className="w-3.5 h-3.5" />
                       <span>Field Ops (:3002)</span>
