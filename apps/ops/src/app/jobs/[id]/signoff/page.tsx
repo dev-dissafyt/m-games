@@ -262,7 +262,7 @@ export default function InstallationSignoffPage({
             </div>
 
             {/* Circular Bullseye Bubble Spirit Level */}
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto rounded-full bg-gradient-to-br from-zinc-800 via-zinc-900 to-black border-4 border-zinc-700 shadow-2xl flex items-center justify-center overflow-hidden p-3">
+            <div className="relative w-56 h-56 sm:w-72 sm:h-72 mx-auto rounded-full bg-gradient-to-br from-zinc-800 via-zinc-900 to-black border-4 border-zinc-700 shadow-2xl flex items-center justify-center overflow-hidden p-3">
               {/* Outer Metallic Bezel Rings */}
               <div className="absolute inset-0 rounded-full border-8 border-zinc-800/80 pointer-events-none" />
               <div className="absolute inset-4 rounded-full border border-zinc-700/60 pointer-events-none" />

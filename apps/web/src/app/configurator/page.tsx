@@ -143,23 +143,23 @@ export default function ConfiguratorPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-12 pb-28 lg:pb-12 space-y-6 sm:space-y-8">
       {/* Atelier Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between pb-6 border-b border-zinc-800 gap-4">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-950/60 border border-amber-800/40 text-[11px] font-mono text-amber-400 uppercase tracking-widest">
             <Sparkles className="w-3.5 h-3.5" /> 3D Digital Atelier • Real-Time Physics Shaders
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-2">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mt-2">
             Bespoke Table Configurator
           </h1>
-          <p className="text-sm text-zinc-400 mt-1">
+          <p className="text-xs sm:text-sm text-zinc-400 mt-1">
             Customize tournament wool, solid South African hardwoods, and pocket iron castings in live 3D.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="bg-[#0b0d13] px-4 py-2.5 rounded-2xl border border-zinc-800 font-mono text-xs shadow-inner">
+          <div className="bg-[#0b0d13] px-3.5 py-2 rounded-2xl border border-zinc-800 font-mono text-xs shadow-inner">
             <span className="text-zinc-500 mr-2">SPEC SKU:</span>
             <span className="text-amber-400 font-bold tracking-wider">{generatedSku}</span>
           </div>
@@ -167,7 +167,7 @@ export default function ConfiguratorPage() {
       </div>
 
       {/* Main Studio Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
         {/* Left Column: 3D Interactive Canvas & Quick Specs (7 Cols) */}
         <div className="lg:col-span-7 space-y-4">
           <Table3DViewer
@@ -179,28 +179,28 @@ export default function ConfiguratorPage() {
             onSnapshotReady={(data) => setSnapshotUrl(data)}
           />
 
-          {/* Quick Technical Specs Strip */}
-          <div className="grid grid-cols-4 gap-3">
-            <div className="p-3.5 rounded-2xl bg-[#090b10] border border-zinc-800 text-center">
-              <div className="text-[10px] text-zinc-500 font-mono uppercase">OUTER DIMENSIONS</div>
-              <div className="text-xs font-bold text-white font-mono mt-1">{selectedSize.dims}</div>
+          {/* Quick Technical Specs Strip (2 cols mobile, 4 cols desktop) */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            <div className="p-3 rounded-2xl bg-[#090b10] border border-zinc-800 text-center">
+              <div className="text-[10px] text-zinc-500 font-mono uppercase">OUTER DIMS</div>
+              <div className="text-xs font-bold text-white font-mono mt-0.5">{selectedSize.dims}</div>
             </div>
-            <div className="p-3.5 rounded-2xl bg-[#090b10] border border-zinc-800 text-center">
-              <div className="text-[10px] text-zinc-500 font-mono uppercase">MIN ROOM (57&quot; CUE)</div>
-              <div className="text-xs font-bold text-amber-400 font-mono mt-1">{selectedSize.room}</div>
+            <div className="p-3 rounded-2xl bg-[#090b10] border border-zinc-800 text-center">
+              <div className="text-[10px] text-zinc-500 font-mono uppercase">MIN ROOM (57&quot;)</div>
+              <div className="text-xs font-bold text-amber-400 font-mono mt-0.5">{selectedSize.room}</div>
             </div>
-            <div className="p-3.5 rounded-2xl bg-[#090b10] border border-zinc-800 text-center">
+            <div className="p-3 rounded-2xl bg-[#090b10] border border-zinc-800 text-center">
               <div className="text-[10px] text-zinc-500 font-mono uppercase">SLATE MASS</div>
-              <div className="text-xs font-bold text-white font-mono mt-1">{selectedSize.weight}</div>
+              <div className="text-xs font-bold text-white font-mono mt-0.5">{selectedSize.weight}</div>
             </div>
-            <div className="p-3.5 rounded-2xl bg-[#090b10] border border-zinc-800 text-center">
-              <div className="text-[10px] text-zinc-500 font-mono uppercase">ATELIER LEAD TIME</div>
-              <div className="text-xs font-bold text-emerald-400 font-mono mt-1">4–6 Weeks</div>
+            <div className="p-3 rounded-2xl bg-[#090b10] border border-zinc-800 text-center">
+              <div className="text-[10px] text-zinc-500 font-mono uppercase">LEAD TIME</div>
+              <div className="text-xs font-bold text-emerald-400 font-mono mt-0.5">4–6 Weeks</div>
             </div>
           </div>
 
           {/* Spatial Room Clearance Link Callout */}
-          <div className="p-4 rounded-2xl bg-gradient-to-r from-sky-950/40 via-zinc-900 to-zinc-900 border border-sky-800/40 flex items-center justify-between text-xs">
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-sky-950/40 via-zinc-900 to-zinc-900 border border-sky-800/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
             <div className="flex items-center gap-3">
               <Compass className="w-5 h-5 text-sky-400 shrink-0" />
               <div>
@@ -212,7 +212,7 @@ export default function ConfiguratorPage() {
             </div>
             <Link
               href="/commercial/planner"
-              className="px-3 py-1.5 rounded-xl bg-sky-950 hover:bg-sky-900 text-sky-300 border border-sky-700/50 font-semibold shrink-0 transition-colors"
+              className="px-3.5 py-2 rounded-xl bg-sky-950 hover:bg-sky-900 text-sky-300 border border-sky-700/50 font-semibold shrink-0 transition-colors text-center"
             >
               Open 2D Planner →
             </Link>
@@ -444,6 +444,30 @@ export default function ConfiguratorPage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Sticky Mobile Summary Action Bar */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#06080d]/95 backdrop-blur-xl border-t border-zinc-800/90 p-3 sm:p-4 flex items-center justify-between gap-3 shadow-2xl">
+        <div className="min-w-0 flex-1">
+          <div className="text-[10px] font-mono text-zinc-400 uppercase truncate">
+            {selectedSize.name.split(' ')[0]} • {selectedFelt.name}
+          </div>
+          <div className="text-lg font-black text-amber-400 font-mono leading-tight">
+            {formatZar(totalPrice)}
+          </div>
+          <div className="text-[10px] text-zinc-500 font-mono truncate">
+            50% Dep: {formatZar(depositPrice)}
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleProceed}
+          className="py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 text-black font-extrabold text-xs shadow-lg shadow-amber-950/60 flex items-center gap-1.5 active:scale-95 shrink-0"
+        >
+          <span>Lock Spec</span>
+          <ArrowRight className="w-4 h-4" />
+        </button>
       </div>
     </div>
   );

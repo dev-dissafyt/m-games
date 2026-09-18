@@ -233,13 +233,16 @@ export default function FloorPlannerPage() {
     });
   }, [tables, roomLength, roomWidth, selectedTableId, scale, originX, originY]);
 
-  // Drag and Drop Table Interactions
+  // Drag and Drop Table Interactions (Mouse & Touch)
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    const scaleFactorX = canvas.width / rect.width;
+    const scaleFactorY = canvas.height / rect.height;
+
+    const mouseX = (e.clientX - rect.left) * scaleFactorX;
+    const mouseY = (e.clientY - rect.top) * scaleFactorY;
 
     const meterX = (mouseX - originX) / scale;
     const meterY = (mouseY - originY) / scale;
@@ -266,11 +269,77 @@ export default function FloorPlannerPage() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    const scaleFactorX = canvas.width / rect.width;
+    const scaleFactorY = canvas.height / rect.height;
+
+    const mouseX = (e.clientX - rect.left) * scaleFactorX;
+    const mouseY = (e.clientY - rect.top) * scaleFactorY;
 
     const rawMeterX = (mouseX - originX) / scale;
     const rawMeterY = (mouseY - originY) / scale;
+
+    const newX = Math.max(0.6, Math.min(roomLength - 0.6, rawMeterX - dragOffset.x));
+    const newY = Math.max(0.6, Math.min(roomWidth - 0.6, rawMeterY - dragOffset.y));
+
+    setTables((prev) =>
+      prev.map((t) =>
+        t.id === selectedTableId
+          ? {
+              ...t,
+              center: {
+                x: Math.round(newX * 100) / 100,
+                y: Math.round(newY * 100) / 100,
+              },
+            }
+          : t
+      )
+    );
+  };
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLCanvasElement>) => {
+    if (e.touches.length !== 1) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    const scaleFactorX = canvas.width / rect.width;
+    const scaleFactorY = canvas.height / rect.height;
+
+    const touchX = (e.touches[0].clientX - rect.left) * scaleFactorX;
+    const touchY = (e.touches[0].clientY - rect.top) * scaleFactorY;
+
+    const meterX = (touchX - originX) / scale;
+    const meterY = (touchY - originY) / scale;
+
+    for (const table of tables) {
+      const spec = TABLE_SPECS[table.sizeKey];
+      const radius = Math.max(spec.cabinetLength, spec.cabinetWidth) / 1.4;
+      const dist = Math.hypot(meterX - table.center.x, meterY - table.center.y);
+
+      if (dist <= radius) {
+        setSelectedTableId(table.id);
+        setIsDragging(true);
+        setDragOffset({
+          x: meterX - table.center.x,
+          y: meterY - table.center.y,
+        });
+        return;
+      }
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLCanvasElement>) => {
+    if (!isDragging || !selectedTableId || e.touches.length !== 1) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    const scaleFactorX = canvas.width / rect.width;
+    const scaleFactorY = canvas.height / rect.height;
+
+    const touchX = (e.touches[0].clientX - rect.left) * scaleFactorX;
+    const touchY = (e.touches[0].clientY - rect.top) * scaleFactorY;
+
+    const rawMeterX = (touchX - originX) / scale;
+    const rawMeterY = (touchY - originY) / scale;
 
     const newX = Math.max(0.6, Math.min(roomLength - 0.6, rawMeterX - dragOffset.x));
     const newY = Math.max(0.6, Math.min(roomWidth - 0.6, rawMeterY - dragOffset.y));
@@ -413,7 +482,10 @@ export default function FloorPlannerPage() {
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
               onMouseLeave={handleMouseUp}
-              className="w-full h-auto cursor-crosshair block select-none"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleMouseUp}
+              className="w-full h-auto cursor-crosshair block select-none touch-none"
             />
 
             {/* In-Canvas CAD Status Legend */}

@@ -38,15 +38,15 @@ export default function RootLayout({
         <header className="sticky top-0 z-40 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800/80 shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
             {/* Logo / Brand */}
-            <div className="flex items-center gap-3">
-              <Link href="/jobs" className="flex items-center gap-2.5 group">
-                <div className="w-8 h-8 rounded-xl bg-amber-500 flex items-center justify-center text-zinc-950 font-black shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
+            <div className="flex items-center gap-2.5 shrink-0">
+              <Link href="/jobs" className="flex items-center gap-2 group">
+                <div className="w-8 h-8 rounded-xl bg-amber-500 flex items-center justify-center text-zinc-950 font-black shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform shrink-0">
                   <HardHat className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
                     <span className="font-black text-sm tracking-tight text-white">FIELD OPS</span>
-                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">
+                    <span className="text-[9px] font-mono px-1 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">
                       COCKPIT
                     </span>
                   </div>
@@ -73,7 +73,7 @@ export default function RootLayout({
             </nav>
 
             {/* Telemetry & Cross-App Switcher */}
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-2 shrink-0">
               {/* Truck Telemetry Pill */}
               <div className="hidden lg:flex items-center gap-2 text-xs font-mono bg-zinc-900/90 border border-zinc-800 px-3 py-1.5 rounded-xl">
                 <span className="relative flex h-2 w-2">
@@ -86,7 +86,7 @@ export default function RootLayout({
               </div>
 
               {/* Cross-App Navigation Switcher */}
-              <div className="flex items-center gap-1.5 bg-zinc-900/90 border border-zinc-800 p-1 rounded-xl">
+              <div className="flex items-center gap-1 bg-zinc-900/90 border border-zinc-800 p-1 rounded-xl shrink-0">
                 <a
                   href="http://localhost:3000"
                   target="_blank"

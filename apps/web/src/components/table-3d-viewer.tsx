@@ -586,41 +586,42 @@ export function Table3DViewer({
   };
 
   return (
-    <div className="relative w-full h-[500px] sm:h-[580px] lg:h-[640px] rounded-3xl overflow-hidden bg-[#07080d] border border-zinc-800 shadow-2xl group">
+    <div className="relative w-full h-[360px] sm:h-[480px] lg:h-[620px] rounded-3xl overflow-hidden bg-[#07080d] border border-zinc-800 shadow-2xl group">
       {/* 3D Canvas Mount */}
-      <div ref={mountRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
+      <div ref={mountRef} className="w-full h-full cursor-grab active:cursor-grabbing touch-none" />
 
-      {/* Top Floating Controls: Camera Perspectives */}
-      <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-        <div className="pointer-events-auto flex items-center gap-1.5 bg-[#090b10]/80 backdrop-blur-xl border border-zinc-700/60 p-1 rounded-2xl shadow-xl">
+      {/* Top Floating Controls: Camera Perspectives & Lighting */}
+      <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
+        {/* Camera Views Scrollable Strip */}
+        <div className="pointer-events-auto flex items-center gap-1 bg-[#090b10]/90 backdrop-blur-xl border border-zinc-700/60 p-1 rounded-2xl shadow-xl overflow-x-auto scrollbar-none max-w-[calc(100%-112px)] sm:max-w-none">
           <button
             type="button"
             onClick={() => setActiveView('orbit')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold transition-all shrink-0 ${
               activeView === 'orbit'
-                ? 'bg-amber-500 text-black shadow-md'
+                ? 'bg-amber-500 text-black shadow-md font-bold'
                 : 'text-zinc-300 hover:text-white'
             }`}
           >
-            Showroom 3/4
+            Showroom
           </button>
           <button
             type="button"
             onClick={() => setActiveView('aim')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold transition-all shrink-0 ${
               activeView === 'aim'
-                ? 'bg-amber-500 text-black shadow-md'
+                ? 'bg-amber-500 text-black shadow-md font-bold'
                 : 'text-zinc-300 hover:text-white'
             }`}
           >
-            Aiming Line
+            Aiming
           </button>
           <button
             type="button"
             onClick={() => setActiveView('top')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold transition-all shrink-0 ${
               activeView === 'top'
-                ? 'bg-amber-500 text-black shadow-md'
+                ? 'bg-amber-500 text-black shadow-md font-bold'
                 : 'text-zinc-300 hover:text-white'
             }`}
           >
@@ -629,18 +630,18 @@ export function Table3DViewer({
           <button
             type="button"
             onClick={() => setActiveView('corner')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold transition-all shrink-0 ${
               activeView === 'corner'
-                ? 'bg-amber-500 text-black shadow-md'
+                ? 'bg-amber-500 text-black shadow-md font-bold'
                 : 'text-zinc-300 hover:text-white'
             }`}
           >
-            Pocket Macro
+            Pocket
           </button>
         </div>
 
         {/* Studio Lighting Mood Toggle */}
-        <div className="pointer-events-auto flex items-center gap-1 bg-[#090b10]/80 backdrop-blur-xl border border-zinc-700/60 p-1 rounded-2xl shadow-xl">
+        <div className="pointer-events-auto flex items-center gap-1 bg-[#090b10]/90 backdrop-blur-xl border border-zinc-700/60 p-1 rounded-2xl shadow-xl shrink-0">
           <button
             type="button"
             onClick={() => setLightingMode('studio')}
@@ -651,7 +652,7 @@ export function Table3DViewer({
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            <Sun className="w-4 h-4" />
+            <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
           <button
             type="button"
@@ -663,7 +664,7 @@ export function Table3DViewer({
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
           <button
             type="button"
@@ -675,24 +676,27 @@ export function Table3DViewer({
                 : 'text-zinc-400 hover:text-white'
             }`}
           >
-            <Eye className="w-4 h-4" />
+            <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
         </div>
       </div>
 
       {/* Bottom Floating Bar */}
-      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-        <div className="px-3.5 py-1.5 rounded-full bg-zinc-950/80 backdrop-blur border border-zinc-800 text-[11px] text-zinc-400 font-mono">
-          Drag to rotate 360° • Pinch / Scroll to zoom • Racked Balls
+      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
+        <div className="hidden sm:block px-3.5 py-1.5 rounded-full bg-zinc-950/80 backdrop-blur border border-zinc-800 text-[11px] text-zinc-400 font-mono">
+          Drag to rotate 360° • Pinch / Scroll to zoom
+        </div>
+        <div className="sm:hidden px-2.5 py-1 rounded-full bg-zinc-950/80 backdrop-blur border border-zinc-800 text-[10px] text-zinc-400 font-mono">
+          360° Orbit
         </div>
 
         <button
           type="button"
           onClick={captureSnapshot}
-          className="pointer-events-auto px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black text-xs font-bold shadow-lg shadow-amber-950 transition-all flex items-center gap-1.5 active:scale-95"
+          className="pointer-events-auto px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black text-xs font-bold shadow-lg shadow-amber-950 transition-all flex items-center gap-1.5 active:scale-95 shrink-0"
         >
           <Camera className="w-3.5 h-3.5" />
-          {isCapturing ? 'Rendering HD Snap...' : 'Capture 3D Spec Snapshot'}
+          <span>{isCapturing ? 'Rendering...' : 'Capture Spec'}</span>
         </button>
       </div>
     </div>
