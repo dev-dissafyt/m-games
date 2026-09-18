@@ -4,3 +4,4 @@ export * from './components/badge';
 export * from './components/card';
 export * from './components/input';
 export * from './components/signature-pad';
+export * from './components/order-preview-modal';
