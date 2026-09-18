@@ -35,6 +35,11 @@ const ROOM_PRESETS = [
 
 export default function FloorPlannerPage() {
   const router = useRouter();
+
+  useEffect(() => {
+    router.replace('/designer?mode=planner');
+  }, [router]);
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   // Room state (meters)

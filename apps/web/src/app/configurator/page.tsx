@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Table3DViewer } from '@/components/table-3d-viewer';
@@ -106,6 +106,11 @@ const HARDWARE_FINISHES = [
 
 export default function ConfiguratorPage() {
   const router = useRouter();
+
+  useEffect(() => {
+    router.replace('/designer?mode=3d');
+  }, [router]);
+
   const [selectedSize, setSelectedSize] = useState<typeof SIZES[0]>(SIZES[1]);
   const [selectedFelt, setSelectedFelt] = useState<typeof FELT_COLORS[0]>(FELT_COLORS[2]);
   const [selectedWood, setSelectedWood] = useState<typeof WOOD_FINISHES[0]>(WOOD_FINISHES[0]);

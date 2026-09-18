@@ -19,7 +19,10 @@ import {
   Phone,
   ExternalLink,
   ChevronRight,
+  ChevronDown,
+  CheckCircle2,
 } from 'lucide-react';
+import { AccountWidget } from '@/components/account-widget';
 
 export default function RootLayout({
   children,
@@ -27,6 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<'games' | 'vibes' | null>(null);
 
   return (
     <html lang="en" className="dark scroll-smooth">
@@ -60,72 +64,162 @@ export default function RootLayout({
         {/* Header */}
         <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-[#030305]/95 backdrop-blur-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-zinc-900 border border-neon-cyan/40 text-white font-black text-xl shadow-subtle-cyan group-hover:border-neon-cyan group-hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all shrink-0">
+            {/* Logo: Only square with M and M-GAMES in text, no subtext */}
+            <Link href="/" className="flex items-center gap-3 group shrink-0">
+              <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-zinc-900 border border-neon-cyan/40 text-white font-black text-xl shadow-subtle-cyan group-hover:border-neon-cyan group-hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all">
                 <span>M</span>
                 <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 rounded-full bg-neon-lime border-2 border-black" />
               </div>
-              <div className="flex flex-col">
-                <span className="font-extrabold tracking-wider text-white text-base font-mono">
-                  M-GAMES
-                </span>
-                <span className="text-[9px] text-zinc-400 tracking-[0.22em] font-mono font-semibold">
-                  AMUSEMENTS & BILLIARDS
-                </span>
-              </div>
+              <span className="font-extrabold tracking-wider text-white text-lg font-mono">
+                M-GAMES
+              </span>
             </Link>
 
-            {/* Navigation links (Desktop) */}
-            <nav className="hidden xl:flex items-center gap-7 text-xs font-semibold uppercase tracking-wider text-zinc-400">
-              <Link href="/#pool" className="hover:text-neon-cyan transition-colors flex items-center gap-1.5">
-                <Trophy className="w-3.5 h-3.5 text-neon-cyan/70" />
-                Pool Tables
-              </Link>
-              <Link href="/#arcades" className="hover:text-neon-pink transition-colors flex items-center gap-1.5">
-                <Gamepad2 className="w-3.5 h-3.5 text-neon-pink/70" />
-                Arcades
-              </Link>
-              <Link href="/#jukeboxes" className="hover:text-neon-amber transition-colors flex items-center gap-1.5">
-                <Disc3 className="w-3.5 h-3.5 text-neon-amber/70" />
-                Jukeboxes
-              </Link>
-              <Link href="/#accessories" className="hover:text-zinc-200 transition-colors">
-                Lighting & Gear
-              </Link>
-              <Link href="/#projects" className="hover:text-neon-lime transition-colors flex items-center gap-1.5">
-                <Camera className="w-3.5 h-3.5 text-neon-lime/70" />
-                Past Projects
-              </Link>
-              <Link href="/configurator" className="hover:text-neon-cyan transition-colors text-zinc-300">
-                3D Configurator
-              </Link>
-              <Link href="/commercial/planner" className="hover:text-zinc-200 transition-colors">
-                2D CAD Planner
+            {/* Middle Navigation: Games [Pool Tables, Arcade Games] & Vibes [Jukebox, Lighting & Gear] & Reviews */}
+            <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs font-semibold uppercase tracking-wider text-zinc-400">
+              {/* GAMES Dropdown */}
+              <div
+                className="relative group py-2"
+                onMouseEnter={() => setActiveDropdown('games')}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <button
+                  type="button"
+                  onClick={() => setActiveDropdown(activeDropdown === 'games' ? null : 'games')}
+                  className="flex items-center gap-1.5 hover:text-white transition-colors group-hover:text-neon-cyan font-mono"
+                >
+                  <Gamepad2 className="w-3.5 h-3.5 text-neon-cyan/80" />
+                  <span>GAMES</span>
+                  <ChevronDown className="w-3 h-3 text-zinc-500 group-hover:text-neon-cyan group-hover:rotate-180 transition-transform duration-200" />
+                </button>
+
+                {activeDropdown === 'games' && (
+                  <div className="absolute top-full -left-4 w-72 rounded-2xl bg-[#080a0f]/98 border border-zinc-800 shadow-2xl p-2.5 space-y-1 backdrop-blur-2xl z-50 animate-in fade-in zoom-in-95 duration-100">
+                    <Link
+                      href="/#pool"
+                      onClick={() => setActiveDropdown(null)}
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-zinc-900/90 border border-transparent hover:border-zinc-700/80 transition-all group/item"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-neon-cyan/10 border border-neon-cyan/30 flex items-center justify-center text-neon-cyan shrink-0 mt-0.5 group-hover/item:border-neon-cyan">
+                        <Trophy className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-white group-hover/item:text-neon-cyan transition-colors">
+                          Pool Tables
+                        </div>
+                        <div className="text-[10px] text-zinc-400 normal-case leading-tight mt-0.5">
+                          7ft Pub Classics, 8ft Pro Tournaments & Italian Slate
+                        </div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/#arcades"
+                      onClick={() => setActiveDropdown(null)}
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-zinc-900/90 border border-transparent hover:border-zinc-700/80 transition-all group/item"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-neon-pink/10 border border-neon-pink/30 flex items-center justify-center text-neon-pink shrink-0 mt-0.5 group-hover/item:border-neon-pink">
+                        <Gamepad2 className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-white group-hover/item:text-neon-pink transition-colors">
+                          Arcade Games
+                        </div>
+                        <div className="text-[10px] text-zinc-400 normal-case leading-tight mt-0.5">
+                          3,000+ Classic Multicades & 2-Player Coin-Op Cabinets
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* VIBES Dropdown */}
+              <div
+                className="relative group py-2"
+                onMouseEnter={() => setActiveDropdown('vibes')}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <button
+                  type="button"
+                  onClick={() => setActiveDropdown(activeDropdown === 'vibes' ? null : 'vibes')}
+                  className="flex items-center gap-1.5 hover:text-white transition-colors group-hover:text-neon-amber font-mono"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-neon-amber/80" />
+                  <span>VIBES</span>
+                  <ChevronDown className="w-3 h-3 text-zinc-500 group-hover:text-neon-amber group-hover:rotate-180 transition-transform duration-200" />
+                </button>
+
+                {activeDropdown === 'vibes' && (
+                  <div className="absolute top-full -left-4 w-72 rounded-2xl bg-[#080a0f]/98 border border-zinc-800 shadow-2xl p-2.5 space-y-1 backdrop-blur-2xl z-50 animate-in fade-in zoom-in-95 duration-100">
+                    <Link
+                      href="/#jukeboxes"
+                      onClick={() => setActiveDropdown(null)}
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-zinc-900/90 border border-transparent hover:border-zinc-700/80 transition-all group/item"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-neon-amber/10 border border-neon-amber/30 flex items-center justify-center text-neon-amber shrink-0 mt-0.5 group-hover/item:border-neon-amber">
+                        <Disc3 className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-white group-hover/item:text-neon-amber transition-colors">
+                          Jukeboxes
+                        </div>
+                        <div className="text-[10px] text-zinc-400 normal-case leading-tight mt-0.5">
+                          Illuminated Bubble Jukeboxes & Bluetooth Sound Centers
+                        </div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/#accessories"
+                      onClick={() => setActiveDropdown(null)}
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-zinc-900/90 border border-transparent hover:border-zinc-700/80 transition-all group/item"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-neon-lime/10 border border-neon-lime/30 flex items-center justify-center text-neon-lime shrink-0 mt-0.5 group-hover/item:border-neon-lime">
+                        <Sparkles className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-white group-hover/item:text-neon-lime transition-colors">
+                          Lighting & Gear
+                        </div>
+                        <div className="text-[10px] text-zinc-400 normal-case leading-tight mt-0.5">
+                          Overhead Billiard Canopies, Ash Cues, Chalk & Racks
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Reviews / Completed Orders Link */}
+              <Link
+                href="/#reviews"
+                className="hover:text-white transition-colors flex items-center gap-1.5 font-mono text-zinc-400 hover:text-emerald-400"
+              >
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400/80" />
+                <span>REVIEWS & DELIVERIES</span>
               </Link>
             </nav>
 
-            {/* CTAs & Mobile Hamburger */}
-            <div className="flex items-center gap-2.5">
+            {/* Right CTAs: Account Management + Unified Studio Designer Button */}
+            <div className="flex items-center gap-3">
+              {/* Account Management (Signed in status & client navigation) */}
+              <AccountWidget />
+
+              {/* Unified Studio Designer Action Button */}
               <Link
-                href="/commercial/planner"
-                className="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2.5 rounded-xl border border-zinc-800 bg-zinc-900/80 text-zinc-300 hover:text-white hover:border-neon-cyan/70 btn-hover-glow-cyan font-mono"
+                href="/designer"
+                className="inline-flex items-center justify-center gap-2 text-xs font-bold px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-white text-black hover:bg-zinc-100 btn-hover-glow-white active:scale-95 font-mono tracking-wider transition-all"
               >
-                <Compass className="w-3.5 h-3.5 text-neon-cyan" />
-                Venue Planner
-              </Link>
-              <Link
-                href="/configurator"
-                className="inline-flex items-center justify-center text-xs font-bold px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-white text-black hover:bg-zinc-100 btn-hover-glow-white active:scale-95 font-mono tracking-wider"
-              >
-                BUILD TABLE
+                <Sparkles className="w-3.5 h-3.5 text-black" />
+                <span>STUDIO DESIGNER</span>
               </Link>
 
               {/* Mobile Hamburger Toggle Button */}
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="xl:hidden p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white transition-colors"
+                className="md:hidden p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white transition-colors"
                 aria-label="Toggle Navigation Menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -136,15 +230,30 @@ export default function RootLayout({
           {/* Mobile Sliding Drawer Navigation */}
           {mobileMenuOpen && (
             <div
-              className="xl:hidden fixed inset-0 top-[110px] z-50 bg-black/90 backdrop-blur-2xl border-t border-zinc-800 p-6 flex flex-col justify-between overflow-y-auto"
+              className="md:hidden fixed inset-0 top-[90px] z-50 bg-black/95 backdrop-blur-2xl border-t border-zinc-800 p-6 flex flex-col justify-between overflow-y-auto"
               onClick={() => setMobileMenuOpen(false)}
             >
               <div className="space-y-6" onClick={(e) => e.stopPropagation()}>
+                {/* Primary Studio Action */}
+                <Link
+                  href="/designer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full p-4 rounded-2xl bg-gradient-to-r from-neon-cyan/20 via-zinc-900 to-zinc-900 border border-neon-cyan/50 text-white font-mono font-bold flex items-center justify-between"
+                >
+                  <span className="flex items-center gap-2.5">
+                    <Sparkles className="w-4 h-4 text-neon-cyan" />
+                    <span>LAUNCH STUDIO DESIGNER</span>
+                  </span>
+                  <span className="text-xs text-neon-cyan font-mono">3D & CAD →</span>
+                </Link>
+
+                {/* GAMES Category */}
                 <div className="space-y-2">
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 font-bold">
-                    Amusements & Billiards
+                  <div className="text-[10px] font-mono uppercase tracking-widest text-neon-cyan font-bold flex items-center gap-1.5">
+                    <Gamepad2 className="w-3.5 h-3.5" />
+                    Games Selection
                   </div>
-                  <nav className="space-y-1">
+                  <nav className="space-y-1.5">
                     <Link
                       href="/#pool"
                       onClick={() => setMobileMenuOpen(false)}
@@ -168,7 +277,16 @@ export default function RootLayout({
                       </span>
                       <ChevronRight className="w-4 h-4 text-zinc-600" />
                     </Link>
+                  </nav>
+                </div>
 
+                {/* VIBES Category */}
+                <div className="space-y-2">
+                  <div className="text-[10px] font-mono uppercase tracking-widest text-neon-amber font-bold flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    Vibes & Audio
+                  </div>
+                  <nav className="space-y-1.5">
                     <Link
                       href="/#jukeboxes"
                       onClick={() => setMobileMenuOpen(false)}
@@ -187,55 +305,27 @@ export default function RootLayout({
                       className="flex items-center justify-between p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 text-sm font-bold text-white transition-colors"
                     >
                       <span className="flex items-center gap-2.5">
-                        <Sparkles className="w-4 h-4 text-zinc-400" />
-                        Overhead Billiard Lighting & Cues
-                      </span>
-                      <ChevronRight className="w-4 h-4 text-zinc-600" />
-                    </Link>
-
-                    <Link
-                      href="/#projects"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center justify-between p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 text-sm font-bold text-white hover:border-neon-lime/60 transition-colors"
-                    >
-                      <span className="flex items-center gap-2.5">
-                        <Camera className="w-4 h-4 text-neon-lime" />
-                        Past Cape Town Projects
+                        <Sparkles className="w-4 h-4 text-neon-lime" />
+                        Lighting & Billiard Gear
                       </span>
                       <ChevronRight className="w-4 h-4 text-zinc-600" />
                     </Link>
                   </nav>
                 </div>
 
-                {/* Interactive Tools */}
+                {/* REVIEWS & DELIVERIES */}
                 <div className="space-y-2 pt-2 border-t border-zinc-800">
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 font-bold">
-                    Design & Planning Tools
-                  </div>
-                  <div className="grid grid-cols-1 gap-2">
-                    <Link
-                      href="/configurator"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="p-3.5 rounded-2xl bg-gradient-to-r from-amber-500/20 to-zinc-900 border border-amber-500/40 text-amber-300 font-bold text-sm flex items-center justify-between"
-                    >
-                      <span className="flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-amber-400" />
-                        3D Bespoke Pool Configurator
-                      </span>
-                      <span className="text-xs font-mono">Open →</span>
-                    </Link>
-                    <Link
-                      href="/commercial/planner"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="p-3.5 rounded-2xl bg-gradient-to-r from-sky-500/20 to-zinc-900 border border-sky-500/40 text-sky-300 font-bold text-sm flex items-center justify-between"
-                    >
-                      <span className="flex items-center gap-2">
-                        <Compass className="w-4 h-4 text-sky-400" />
-                        2D Venue CAD Clearance Planner
-                      </span>
-                      <span className="text-xs font-mono">Open →</span>
-                    </Link>
-                  </div>
+                  <Link
+                    href="/#reviews"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-between p-3 rounded-2xl bg-zinc-950 border border-zinc-800/80 text-sm font-bold text-white hover:border-emerald-400/60 transition-colors"
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                      Completed Orders & Reviews
+                    </span>
+                    <ChevronRight className="w-4 h-4 text-zinc-600" />
+                  </Link>
                 </div>
 
                 {/* Staff Portals */}

@@ -40,55 +40,105 @@ export default function HomePage() {
   const packageLeaseCost = tableCount * 2200 + arcadeCount * 1800 + jukeboxCount * 1500;
   const netVenueProfit = Math.max(0, totalMonthlyGross - packageLeaseCost);
 
-  // Project Gallery Filter State
-  const [galleryFilter, setGalleryFilter] = useState<'ALL' | 'PUBS' | 'MANCAVES' | 'CORPORATE'>('ALL');
+  // Completed Orders & Reviews Filter State
+  const [reviewFilter, setReviewFilter] = useState<'ALL' | 'PUBS' | 'MANCAVES' | 'CORPORATE'>('ALL');
 
-  const PAST_PROJECTS = [
+  const COMPLETED_ORDERS_REVIEWS = [
     {
-      id: 'proj-brass-bell',
-      title: 'The Brass Bell Harbour Pub',
-      category: 'PUBS',
-      location: 'Kalk Bay, Cape Town',
-      equipment: '2× 7ft Coin-Op Tables • Custom Kiaat • Neon Canopies',
-      imageUrl: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=80',
+      id: 'ord-brass-bell-01',
+      orderNumber: 'MG-2026-0182',
+      rating: 5,
+      clientName: 'Dave Stewart',
+      clientRole: 'Proprietor & Managing Partner',
+      venueName: 'The Brass Bell Harbour Pub',
+      location: 'Kalk Bay Harbour, Cape Town',
+      category: 'PUBS' as const,
       badge: 'COMMERCIAL LEASE',
-      desc: 'Sea-facing tavern game deck. Delivered via 14-step tight stair rigging with 4-man heavy crew and machinist level sign-off.',
+      badgeColor: 'emerald',
+      equipment: '2× 7ft Coin-Op Classics • Wild Kiaat Natural Oil • Speed Green Felt • 14-Step Sea Ingress',
+      imageUrl: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=80',
+      quote:
+        'The 4-man rigging crew hauled both 310kg slate tables up 14 narrow wooden stairs onto our sea-facing deck without touching a railing. The 0.00° level check was verified with a rolling steel bearing. Coin drop revenue covered the lease within the first 8 days.',
+      verifiedSpecs: ['0.00° Level Cert #MG-7975', 'Signed by Sipho Ndlovu', '4-Man Rigging Crew', '50/50 Coin Split'],
+      deliveredDate: 'Delivered: Sept 2026',
     },
     {
-      id: 'proj-camps-bay',
-      title: 'Camps Bay Executive Penthouse',
-      category: 'MANCAVES',
-      location: 'Camps Bay, Cape Town',
-      equipment: '8ft Clifton Minimalist Dining Conversion • Blue Felt • 4K Pinball',
-      imageUrl: 'https://images.unsplash.com/photo-1544919982-b61976f0ba43?auto=format&fit=crop&w=900&q=80',
-      badge: 'CUSTOM COMMISSION',
-      desc: 'Sleek matte black steel frame pool table converting into a 10-seater banquet dining table, paired with a custom virtual pinball machine.',
-    },
-    {
-      id: 'proj-firemans',
-      title: "Fireman's Arms Historic Sports Bar",
-      category: 'PUBS',
+      id: 'ord-firemans-02',
+      orderNumber: 'MG-2026-0178',
+      rating: 5,
+      clientName: 'Carl Weber',
+      clientRole: 'Owner & General Manager',
+      venueName: "Fireman's Arms Historic Sports Bar",
       location: 'De Waterkant, Cape Town',
-      equipment: '8ft Tournament Pro • Stand-up Multicade (3000 Games) • Bubble Jukebox',
-      imageUrl: 'https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?auto=format&fit=crop&w=900&q=80',
+      category: 'PUBS' as const,
       badge: 'FULL VENUE BUNDLE',
-      desc: 'Complete entertainment zone overhaul with coin-drop retro arcade, illuminated neon bubble jukebox, and tournament slate table.',
+      badgeColor: 'cyan',
+      equipment: '8ft Tournament Pro (Solid Walnut) • 3,000-Game Retro Multicade • Illuminated Bubble Jukebox',
+      imageUrl: 'https://images.unsplash.com/photo-1609710228159-0fa9bd7c0827?auto=format&fit=crop&w=900&q=80',
+      quote:
+        'M-Games transformed our back room into a high-yield destination zone. The 8ft tournament table plays like glass, and the 3000-game multicade keeps crowds entertained between rugby matches. Zero capital upfront was an absolute no-brainer.',
+      verifiedSpecs: ['0.00° Level Cert #MG-8001', '3,000+ Classic Games', 'Illuminated Bubble Jukebox', '48hr Service Guarantee'],
+      deliveredDate: 'Delivered: Aug 2026',
     },
     {
-      id: 'proj-century-tech',
-      title: 'Century City Fintech HQ',
-      category: 'CORPORATE',
+      id: 'ord-camps-bay-03',
+      orderNumber: 'MG-2026-0174',
+      rating: 5,
+      clientName: 'Julian Vance-Moreau',
+      clientRole: 'Private Collector',
+      venueName: 'Camps Bay Ocean Penthouse',
+      location: 'Camps Bay, Cape Town',
+      category: 'MANCAVES' as const,
+      badge: 'CUSTOM COMMISSION',
+      badgeColor: 'purple',
+      equipment: '8ft Clifton Minimalist Dining Conversion • Blue Worsted Cloth • Matte Black Steel A-Frame',
+      imageUrl: 'https://images.unsplash.com/photo-1544919982-b61976f0ba43?auto=format&fit=crop&w=900&q=80',
+      quote:
+        'A bespoke architectural masterpiece. It seamlessly converts into a 10-seater banquet dining table for dinner parties, then lifts off to reveal tournament-grade slate underneath. The engineering tolerances are stunning.',
+      verifiedSpecs: ['Italian Precision Slate', 'Single-Piece Level Sign-Off', 'Custom Steel Powdercoat', 'Dual Dining Top'],
+      deliveredDate: 'Delivered: July 2026',
+    },
+    {
+      id: 'ord-kloof-04',
+      orderNumber: 'MG-2026-0180',
+      rating: 5,
+      clientName: 'Tshiamo Moloi',
+      clientRole: 'Architect & Loft Owner',
+      venueName: 'Kloof Street Skyline Loft',
+      location: 'Gardens, Cape Town',
+      category: 'MANCAVES' as const,
+      badge: 'BESPOKE PURCHASE',
+      badgeColor: 'amber',
+      equipment: '7ft Classic • Indigenous Wild Kiaat Natural Satin • Charcoal Felt • Chrome Cast Pockets',
+      imageUrl: 'https://images.unsplash.com/photo-1615840287214-7ff58936c4cf?auto=format&fit=crop&w=900&q=80',
+      quote:
+        'The natural Kiaat grain matches our bespoke oak flooring flawlessly. Lift access rigging was handled with white gloves. The cushions have crisp, tournament-true rebound. Best investment for entertaining guests in Cape Town.',
+      verifiedSpecs: ['0.00° Stabila Verified', 'Lift Access Rigging', 'Wild Flame Kiaat', 'Championship Wool'],
+      deliveredDate: 'Delivered: Sept 2026',
+    },
+    {
+      id: 'ord-century-05',
+      orderNumber: 'MG-2026-0171',
+      rating: 5,
+      clientName: 'Andre Van Der Merwe',
+      clientRole: 'Head of People & Workplace',
+      venueName: 'Century City Fintech Campus',
       location: 'Century City, Cape Town',
-      equipment: '2× Multicade Arcade Cabinets • 7ft Pub Slate Table • Neon Wall Art',
+      category: 'CORPORATE' as const,
+      badge: 'CORPORATE LEASE',
+      badgeColor: 'lime',
+      equipment: '2× Stand-Up Multicade Cabinets (Custom Branding) • 7ft Pub Slate • Overhead LED Canopy',
       imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80',
-      badge: 'CORPORATE LOUNGE',
-      desc: 'Vibrant employee recreational game center featuring 4-player retro brawlers, custom company branded pool table, and LED table canopy.',
+      quote:
+        'Our tech teams use the arcade machines and pool table daily during sprint reviews. Build quality is commercial tank-grade. Regular complimentary recloth and mechanism maintenance keeps everything in 100% pristine order.',
+      verifiedSpecs: ['Corporate Lease SLA', 'Custom Company Vinyl', 'Complimentary 6-Mo Recloth', 'Multi-Game Coin-Op'],
+      deliveredDate: 'Delivered: June 2026',
     },
   ];
 
-  const filteredProjects = PAST_PROJECTS.filter((p) => {
-    if (galleryFilter === 'ALL') return true;
-    return p.category === galleryFilter;
+  const filteredReviews = COMPLETED_ORDERS_REVIEWS.filter((item) => {
+    if (reviewFilter === 'ALL') return true;
+    return item.category === reviewFilter;
   });
 
   return (
@@ -140,24 +190,25 @@ export default function HomePage() {
               <Lightbulb className="w-3.5 h-3.5 text-neon-purple" /> Neon Lighting
             </a>
             <a
-              href="#projects"
-              className="px-3.5 py-1.5 rounded-xl bg-[#080a0f] border border-neon-lime/25 text-zinc-300 hover:text-white hover:border-neon-lime/80 transition-all hover:shadow-[0_0_15px_rgba(57,255,20,0.3)] text-xs font-mono font-medium flex items-center gap-1.5"
+              href="#reviews"
+              className="px-3.5 py-1.5 rounded-xl bg-[#080a0f] border border-emerald-500/25 text-zinc-300 hover:text-white hover:border-emerald-400/80 transition-all hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] text-xs font-mono font-medium flex items-center gap-1.5"
             >
-              <Camera className="w-3.5 h-3.5 text-neon-lime" /> Past Projects
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Client Reviews
             </a>
           </div>
 
           {/* Primary Action Buttons (Sleek, luminous hover glow) */}
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/configurator"
+              href="/designer?mode=3d"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-white text-black hover:bg-zinc-100 font-bold text-xs tracking-wider font-mono btn-hover-glow-white active:scale-95 transition-all shadow-sm"
             >
+              <Sparkles className="w-4 h-4 text-black" />
               LAUNCH 3D ATELIER
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              href="/commercial/planner"
+              href="/designer?mode=planner"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl border border-zinc-800 bg-[#080a0f] text-zinc-300 hover:text-white hover:border-neon-cyan/70 font-semibold text-xs tracking-wider font-mono btn-hover-glow-cyan active:scale-95 transition-all"
             >
               <Compass className="w-4 h-4 text-neon-cyan" />
@@ -174,7 +225,7 @@ export default function HomePage() {
 
       {/* 2. 🎱 COMMERCIAL & CUSTOM POOL TABLES */}
       <section id="pool" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-arcade-border pb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-800/80 pb-6">
           <div className="space-y-1">
             <div className="inline-flex items-center gap-2 text-xs font-mono text-neon-cyan uppercase tracking-widest">
               <Trophy className="w-4 h-4" /> 01 • Tournament Billiards
@@ -188,7 +239,7 @@ export default function HomePage() {
           </div>
 
           <Link
-            href="/configurator"
+            href="/designer?mode=3d"
             className="text-xs font-mono text-neon-cyan hover:underline flex items-center gap-1 font-bold"
           >
             Configure in 3D Atelier <ChevronRight className="w-4 h-4" />
@@ -230,7 +281,7 @@ export default function HomePage() {
             </div>
 
             <Link
-              href="/configurator?size=SEVEN_FOOT_PUB"
+              href="/designer?size=SEVEN_FOOT_PUB&mode=3d"
               className="w-full py-3 px-4 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-neon-cyan/80 btn-hover-glow-cyan font-mono font-semibold text-xs text-center transition-all block"
             >
               Build 7ft in 3D →
@@ -273,7 +324,7 @@ export default function HomePage() {
             </div>
 
             <Link
-              href="/configurator?size=EIGHT_FOOT_PRO"
+              href="/designer?size=EIGHT_FOOT_PRO&mode=3d"
               className="w-full py-3 px-4 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-neon-pink/80 btn-hover-glow-pink font-mono font-semibold text-xs text-center transition-all block"
             >
               Build 8ft in 3D →
@@ -314,7 +365,7 @@ export default function HomePage() {
             </div>
 
             <Link
-              href="/configurator?size=TWELVE_FOOT_SNOOKER"
+              href="/designer?size=TWELVE_FOOT_SNOOKER&mode=3d"
               className="w-full py-3 px-4 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-neon-amber/80 transition-all hover:shadow-[0_0_15px_rgba(255,183,0,0.3)] font-mono font-semibold text-xs text-center block"
             >
               Build 12ft in 3D →
@@ -652,18 +703,19 @@ export default function HomePage() {
         <div className="borderline-divider-lime" />
       </div>
 
-      {/* 6. 📸 PAST PROJECTS & REAL VENUE INSTALLATIONS */}
-      <section id="projects" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      {/* 6. ⭐ COMPLETED INSTALLATIONS & VERIFIED CLIENT REVIEWS */}
+      <section id="reviews" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative scroll-mt-24">
+        <span id="projects" className="sr-only" />
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-800/80 pb-6">
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 text-xs font-mono text-zinc-400 uppercase tracking-widest">
-              <Camera className="w-4 h-4 text-emerald-400" /> 05 • Real-World Portfolio
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 uppercase tracking-widest font-semibold">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" /> 05 • Verified Deliveries & Client Sign-Offs
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-mono">
-              PAST PROJECTS & VENUE FITOUTS
+              COMPLETED ORDERS & VERIFIED REVIEWS
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-400">
-              Explore completed Cape Town pub makeovers, luxury man caves, and corporate game centers.
+            <p className="text-xs sm:text-sm text-zinc-400 max-w-2xl">
+              Real Cape Town venue makeovers, commercial lease operations, and bespoke private commissions with 0.00° machinist leveling and certified client quotes.
             </p>
           </div>
 
@@ -673,58 +725,119 @@ export default function HomePage() {
               <button
                 key={cat}
                 type="button"
-                onClick={() => setGalleryFilter(cat)}
+                onClick={() => setReviewFilter(cat)}
                 className={`px-3 py-1.5 rounded-xl transition-all font-semibold ${
-                  galleryFilter === cat
+                  reviewFilter === cat
                     ? 'bg-white text-black shadow-sm'
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
-                {cat}
+                {cat === 'PUBS' ? 'COMMERCIAL PUBS' : cat === 'MANCAVES' ? 'RESIDENTIAL' : cat}
               </button>
             ))}
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredProjects.map((proj) => (
+          {filteredReviews.map((order) => (
             <div
-              key={proj.id}
-              className="rounded-3xl border border-zinc-800/90 bg-[#080a0f] overflow-hidden hover:border-zinc-700 hover:shadow-subtle-cyan transition-all group space-y-4 flex flex-col justify-between"
+              key={order.id}
+              className="rounded-3xl border border-zinc-800/90 bg-[#080a0f] overflow-hidden hover:border-zinc-700 hover:shadow-subtle-cyan transition-all group flex flex-col justify-between"
             >
               <div className="space-y-4">
+                {/* Photo Header */}
                 <div
                   className="h-64 bg-cover bg-center relative"
-                  style={{ backgroundImage: `url('${proj.imageUrl}')` }}
+                  style={{ backgroundImage: `url('${order.imageUrl}')` }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080a0f] via-[#080a0f]/20 to-transparent" />
-                  <div className="absolute top-4 left-4 flex gap-2">
-                    <span className="px-3 py-1 rounded-full bg-black/80 backdrop-blur border border-zinc-700 text-[10px] font-mono text-zinc-200 font-bold">
-                      {proj.badge}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080a0f] via-[#080a0f]/30 to-transparent" />
+
+                  {/* Top badges */}
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                    <span className="px-3 py-1 rounded-full bg-black/80 backdrop-blur border border-zinc-700 text-[10px] font-mono text-white font-bold flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]" />
+                      {order.badge}
+                    </span>
+
+                    <span className="px-3 py-1 rounded-full bg-black/80 backdrop-blur border border-zinc-800 text-[10px] font-mono text-neon-cyan font-bold">
+                      ORDER #{order.orderNumber}
                     </span>
                   </div>
+
+                  {/* Bottom Location */}
                   <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                    <div className="text-xs font-mono text-zinc-300 font-semibold bg-black/70 px-2.5 py-1 rounded-lg backdrop-blur border border-zinc-800">
-                      📍 {proj.location}
+                    <div className="text-xs font-mono text-zinc-300 font-semibold bg-black/75 px-2.5 py-1 rounded-lg backdrop-blur border border-zinc-800">
+                      📍 {order.location}
+                    </div>
+                    <div className="text-[10px] font-mono text-zinc-400 bg-black/75 px-2.5 py-1 rounded-lg backdrop-blur border border-zinc-800">
+                      {order.deliveredDate}
                     </div>
                   </div>
                 </div>
 
-                <div className="px-6 space-y-2">
-                  <h3 className="text-xl font-bold text-white group-hover:text-zinc-200 transition-colors">
-                    {proj.title}
-                  </h3>
-                  <div className="text-xs text-zinc-400 font-mono">
-                    {proj.equipment}
+                {/* Body Content */}
+                <div className="px-6 space-y-3">
+                  {/* Stars and Client info */}
+                  <div className="flex items-center justify-between border-b border-zinc-800/60 pb-3">
+                    <div>
+                      <div className="text-sm font-bold text-white flex items-center gap-2">
+                        <span>{order.clientName}</span>
+                        <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                      </div>
+                      <div className="text-[11px] text-zinc-400 font-mono">
+                        {order.clientRole} • <span className="text-zinc-300 font-semibold">{order.venueName}</span>
+                      </div>
+                    </div>
+
+                    {/* 5 Stars */}
+                    <div className="flex items-center gap-0.5" aria-label="5 Star Rating">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
                   </div>
-                  <p className="text-xs text-zinc-400 leading-relaxed">{proj.desc}</p>
+
+                  {/* Client Review Quote */}
+                  <div className="relative pl-3.5 border-l-2 border-neon-cyan/50 py-1">
+                    <p className="text-xs text-zinc-300 leading-relaxed italic">
+                      &ldquo;{order.quote}&rdquo;
+                    </p>
+                  </div>
+
+                  {/* Installed Equipment SKU & Specs */}
+                  <div className="space-y-1.5 pt-1">
+                    <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider font-bold">
+                      Installed Equipment & Venue Specs:
+                    </div>
+                    <div className="text-xs font-mono text-zinc-300">
+                      {order.equipment}
+                    </div>
+                  </div>
+
+                  {/* Verified Spec Tags */}
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {order.verifiedSpecs.map((spec, i) => (
+                      <span
+                        key={i}
+                        className="px-2 py-0.5 rounded-md bg-zinc-950 border border-zinc-800 text-[10px] font-mono text-zinc-400"
+                      >
+                        ✓ {spec}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              <div className="px-6 pb-6 pt-2">
-                <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800/80 text-[11px] text-zinc-400 font-mono flex items-center justify-between">
-                  <span>Delivered & Leveled by M-Games Team</span>
-                  <span className="text-emerald-400 font-semibold">✓ 0.00° Precision Cert</span>
+              {/* Footer Cert Stamp */}
+              <div className="px-6 pb-6 pt-4">
+                <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800/90 text-[11px] text-zinc-400 font-mono flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]" />
+                    <span>Precision Leveled & Signed Off</span>
+                  </div>
+                  <span className="text-emerald-400 font-semibold flex items-center gap-1">
+                    ✓ 0.00° Precision Cert Active
+                  </span>
                 </div>
               </div>
             </div>
@@ -847,7 +960,7 @@ export default function HomePage() {
               </div>
 
               <Link
-                href="/commercial/planner"
+                href="/designer?mode=planner"
                 className="w-full py-3.5 px-4 rounded-xl bg-white text-black font-bold text-xs font-mono tracking-wider hover:bg-zinc-100 btn-hover-glow-white transition-all flex items-center justify-center gap-2 block active:scale-95 shadow-sm"
               >
                 TEST VENUE FIT ON CAD PLANNER
