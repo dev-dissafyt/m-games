@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
+  --background: #05060a;
+  --foreground: #f8fafc;
 }
 
 body {
@@ -12,4 +12,56 @@ body {
   color: var(--foreground);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(255, 0, 127, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 15% 70%, rgba(176, 38, 255, 0.05) 0%, transparent 40%);
+}
+
+/* Neon Glow Typography Utilities */
+.neon-glow-cyan {
+  text-shadow: 0 0 7px rgba(0, 240, 255, 0.8), 0 0 16px rgba(0, 240, 255, 0.5), 0 0 28px rgba(0, 240, 255, 0.3);
+}
+
+.neon-glow-pink {
+  text-shadow: 0 0 7px rgba(255, 0, 127, 0.8), 0 0 16px rgba(255, 0, 127, 0.5), 0 0 28px rgba(255, 0, 127, 0.3);
+}
+
+.neon-glow-lime {
+  text-shadow: 0 0 7px rgba(57, 255, 20, 0.8), 0 0 16px rgba(57, 255, 20, 0.5), 0 0 28px rgba(57, 255, 20, 0.3);
+}
+
+.neon-glow-amber {
+  text-shadow: 0 0 7px rgba(255, 183, 0, 0.8), 0 0 16px rgba(255, 183, 0, 0.5), 0 0 28px rgba(255, 183, 0, 0.3);
+}
+
+.neon-glow-purple {
+  text-shadow: 0 0 7px rgba(176, 38, 255, 0.8), 0 0 16px rgba(176, 38, 255, 0.5), 0 0 28px rgba(176, 38, 255, 0.3);
+}
+
+/* Glowing Neon Tube Dividers */
+.neon-tube-cyan {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+  box-shadow: 0 0 10px #00f0ff, 0 0 20px rgba(0, 240, 255, 0.5);
+}
+
+.neon-tube-pink {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff007f, transparent);
+  box-shadow: 0 0 10px #ff007f, 0 0 20px rgba(255, 0, 127, 0.5);
+}
+
+.neon-tube-lime {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #39ff14, transparent);
+  box-shadow: 0 0 10px #39ff14, 0 0 20px rgba(57, 255, 20, 0.5);
+}
+
+/* Subtle Retro Grid Floor Overlay */
+.arcade-grid-bg {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(26, 34, 54, 0.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(26, 34, 54, 0.35) 1px, transparent 1px);
 }
